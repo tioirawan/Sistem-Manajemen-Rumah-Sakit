@@ -17,7 +17,7 @@ public class DBHelper {
     public static void bukaKoneksi() {
         if (koneksi == null) {
             try {
-                String url = "jdbc:mysql://localhost:3306/dbperpus";
+                String url = "jdbc:mysql://localhost:3306/dbrs";
                 String user = "root";
                 String password = "";
                 DriverManager.registerDriver(new com.mysql.jdbc.Driver());

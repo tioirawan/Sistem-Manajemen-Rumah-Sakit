@@ -4,6 +4,8 @@
  */
 package kel2.ti2a.sistemrumahsakit.data.service;
 
+import kel2.ti2a.sistemrumahsakit.data.model.Karyawan;
+
 /**
  *
  * @author tioirawan
@@ -15,7 +17,7 @@ public interface ILoginService {
      * @param nip nip yang digunakan untuk login
      * @param password password yang digunakan untuk login
      *
-     * @return true jika login berhasil, false jika login gagal
+     * @return Karyawan dan throw exception jika nip atau password salah
     */
-    boolean login(String nip, String password);
+    public Karyawan login(String nip, String password);
 }
