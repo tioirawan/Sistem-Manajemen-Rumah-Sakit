@@ -52,6 +52,7 @@ public class DaftarAntrianForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jTable1);
 
         judulPoli.setText("Antrian Poli Gigi");

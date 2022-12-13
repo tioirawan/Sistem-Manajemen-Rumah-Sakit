@@ -7,6 +7,7 @@ package kel2.ti2a.sistemrumahsakit.ui.auth;
 import javax.swing.JOptionPane;
 import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
 import kel2.ti2a.sistemrumahsakit.ui.pelayanan.ManajemenSistemAntrian;
+import kel2.ti2a.sistemrumahsakit.ui.pelayanan.DokterCheckUpForm;
 
 /**
  *
@@ -93,6 +94,8 @@ public class LoginKaryawan extends javax.swing.JFrame {
                  this.setVisible(false);
                 break;
             case "dokter":
+                new DokterCheckUpForm().setVisible(true);
+                this.setVisible(false);
                 // new MenuKaryawan().setVisible(true);
                 // this.setVisible(false);
                 break;
