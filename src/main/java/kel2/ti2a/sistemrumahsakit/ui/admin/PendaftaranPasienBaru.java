@@ -15,6 +15,14 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
      */
     public PendaftaranPasienBaru() {
         initComponents();
+        
+        jLabel8.setVisible(false);
+        jLabel9.setVisible(false);
+        jLabel10.setVisible(false);
+        jTextField6.setVisible(false);
+        jTextField8.setVisible(false);
+        jTextField9.setVisible(false);
+        
     }
 
     /**
@@ -48,12 +56,11 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         jTextField8 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Nama");
-
-        jTextField1.setText("jTextField1");
 
         jLabel2.setText("Jenis Pasien");
 
@@ -85,11 +92,8 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
         jLabel5.setText("Tanggal lahir");
 
-        jTextField4.setText("jTextField1");
-
         jLabel6.setText("No. KTP");
 
-        jTextField5.setText("jTextField1");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -106,14 +110,12 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
         jLabel9.setText("Nama Asuransi");
 
-        jTextField6.setText("jTextField1");
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
             }
         });
 
-        jTextField8.setText("jTextField1");
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField8ActionPerformed(evt);
@@ -122,12 +124,14 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
         jLabel10.setText("No BPJS");
 
-        jTextField9.setText("jTextField1");
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField9ActionPerformed(evt);
             }
         });
+
+        jLabel11.setFont(new java.awt.Font("Gloucester MT Extra Condensed", 1, 36)); // NOI18N
+        jLabel11.setText("Pendaftaran Pasien");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,7 +165,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(40, 40, 40)
+                                            .addGap(30, 30, 30)
                                             .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jTextField4)
                                         .addComponent(jTextField1)
@@ -172,6 +176,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
                             .addComponent(jLabel10)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))
@@ -180,9 +185,11 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,8 +199,8 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                             .addComponent(jRadioButton2)
                             .addComponent(jRadioButton1))
                         .addGap(59, 59, 59))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -253,6 +260,29 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        String value = jComboBox1.getSelectedItem().toString();
+        if (value.equals("BPJS")) {
+            jLabel10.setVisible(true);
+            jTextField9.setVisible(true);
+            jLabel8.setVisible(false);
+            jLabel9.setVisible(false);
+            jTextField6.setVisible(false);
+            jTextField8.setVisible(false);
+        } else if (value.equals("Asuransi")) {
+            jLabel8.setVisible(true);
+            jLabel9.setVisible(true);
+            jTextField6.setVisible(true);
+            jTextField8.setVisible(true);
+            jLabel10.setVisible(false);
+            jTextField9.setVisible(false);
+        } else{
+            jLabel8.setVisible(false);
+            jLabel9.setVisible(false);
+            jLabel10.setVisible(false);
+            jTextField6.setVisible(false);
+            jTextField8.setVisible(false);
+            jTextField9.setVisible(false);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
@@ -304,6 +334,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

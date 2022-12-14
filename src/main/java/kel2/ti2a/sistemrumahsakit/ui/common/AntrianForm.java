@@ -5,6 +5,7 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.common;
 
+import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
 /**
  *
  * @author DELL
@@ -107,10 +108,15 @@ public class AntrianForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        AdministrasiForm form = new AdministrasiForm();
+        
+        form.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
