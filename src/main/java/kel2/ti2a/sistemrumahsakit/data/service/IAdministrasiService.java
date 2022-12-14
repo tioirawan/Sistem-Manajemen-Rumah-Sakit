@@ -7,7 +7,7 @@ package kel2.ti2a.sistemrumahsakit.data.service;
 import java.util.ArrayList;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
-import kel2.ti2a.sistemrumahsakit.data.model.Pembayaran;
+import kel2.ti2a.sistemrumahsakit.data.model.Transaksi;
 
 
 /**
@@ -32,7 +32,7 @@ public interface IAdministrasiService {
      * 
      * @return objek Antrian jika pendaftaran berhasil, false jika pendaftaran gagal
     */
-    public Antrian daftarkanPasienKeAntrian(int pasienId, int unitPelayananId);
+    public Antrian daftarkanPasienKeAntrian(int nomorPasien, int unitPelayananId);
 
 
     /**
@@ -42,7 +42,7 @@ public interface IAdministrasiService {
      *
      * @return daftar pembayaran pasien
      */
-    public ArrayList<Pembayaran> getDaftarTransaksiPasien(int pasienId);
+    public ArrayList<Transaksi> getDaftarTransaksiPasien(int pasienId);
 
     /**
      * Fungsi untuk mengatur nominal pembayaran transaksi
@@ -52,5 +52,5 @@ public interface IAdministrasiService {
      *
      * @return true jika pembayaran berhasil, false jika pembayaran gagal
     */
-    public boolean setNominalPembayaran(int transaksiId, int nominal);
+    public boolean setPembayaran(int transaksiId, String metode, int nominal);
 }

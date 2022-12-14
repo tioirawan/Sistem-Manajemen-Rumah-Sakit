@@ -17,7 +17,7 @@ public interface ILoginService {
      * @param nip nip yang digunakan untuk login
      * @param password password yang digunakan untuk login
      *
-     * @return Karyawan dan throw exception jika nip atau password salah
+     * @return Karyawan null jika gagal login
     */
     public Karyawan login(String nip, String password);
 }
