@@ -4,6 +4,10 @@
  */
 package kel2.ti2a.sistemrumahsakit.data.model;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
+
 /**
  *
  * @author tioirawan
@@ -64,5 +68,28 @@ public class Antrian {
         this.status = status;
     }
     
-    
+    public ArrayList<Antrian> getAntrianByUnitPelayanan(int id){
+        ArrayList<Antrian> listAntrian = new ArrayList();
+        ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"'");
+        try{
+            while (rs.next()) {
+                Antrian a = new Antrian();
+                a.setId(rs.getInt("id"));
+                a.setNomorAntrean(rs.getInt("nomorAntrean"));
+                a.setPasien_id(rs.getInt("pasien_id"));
+                a.setStatus(rs.getString("status"));
+                a.setTimestamp(rs.getString("timestamp"));
+                a.setUnitpelayanan_id(rs.getInt("unitPelayanan_id"));
+                
+                listAntrian.add(a);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return listAntrian;
+    }
+   
 }
+
+
