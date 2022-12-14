@@ -8,6 +8,6 @@ package kel2.ti2a.sistemrumahsakit.data.model;
  *
  * @author tioirawan
  */
-public class Pembayaran {
+public class Transaksi {
     
 }
