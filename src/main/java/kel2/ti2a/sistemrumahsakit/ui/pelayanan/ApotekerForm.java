@@ -4,6 +4,10 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import kel2.ti2a.sistemrumahsakit.data.model.Obat;
+
 /**
  *
  * @author josaf
@@ -15,6 +19,24 @@ public class ApotekerForm extends javax.swing.JFrame {
      */
     public ApotekerForm() {
         initComponents();
+        tampilData();
+    }
+    
+    public void tampilData(){
+        String[] kolom = {"ID", "Nama", "Merek", "Harga"};
+        ArrayList<Obat> listObat = new Obat().getAll();
+        Object rowData[] = new Object[4];
+        
+        jTable1.setModel(new DefaultTableModel(new Object[][] {}, kolom));
+        
+        for(Obat ob : listObat){
+            rowData[0] = ob.getId();
+            rowData[1] = ob.getNama();
+            rowData[2] = ob.getMerek();
+            rowData[3] = ob.getHarga();
+            
+            ((DefaultTableModel)jTable1.getModel()).addRow(rowData);
+        }
     }
 
     /**
