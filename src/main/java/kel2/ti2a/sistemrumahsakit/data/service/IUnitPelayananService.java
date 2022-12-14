@@ -37,4 +37,6 @@ public interface IUnitPelayananService {
      * @return antrian aktif unit pelayanan
     */
     public Antrian getAntrianAktifUnitPelayanan(int unitPelayananId);
+    
+    public UnitPelayanan getUnitPelayananDokter(int dokterId);
 }

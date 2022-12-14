@@ -6,39 +6,28 @@ package kel2.ti2a.sistemrumahsakit.data.service;
 
 import java.util.ArrayList;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
+import kel2.ti2a.sistemrumahsakit.data.model.ObatDiagnosa;
 
 /**
  *
  * @author tioirawan
  */
 public interface IPelayananService {
+    
     /**
-     * Fungsi untuk set antrian aktif unit pelayanan menjadi checkup
+     * Fungsi untuk melihat seluruh antrian obat (Dilakukan oleh perawat)
      *
-     * @param antrianId id antrian yang akan di dequeue
-     *
-     * @return antrian aktif baru unit pelayanan
+     * @return seluruh antrian obat
     */
-    public Antrian setAntrianAktifCheckup(int antrianId);
+    public ArrayList<Antrian> getDaftarAntrianCheckup(int unitServiceId);
 
-    /**
-      * Fungsi untuk set antrian aktif unit pelayanan menjadi selesai checkup
-      *
-      * @param antrianId id antrian yang akan di dequeue
-      *
-      * @return antrian aktif baru unit pelayanan
-      */
-    public Antrian setAntrianAktifSelesaiCheckup(int antrianId);
-
-    /**
-      * Fungsi untuk set antrian aktif unit pelayanan menjadi selesai obat
-      *
-      * @param antrianId id antrian yang akan di dequeue
-      *
-      * @return antrian aktif baru unit pelayanan
-      */
-    public Antrian setAntrianAktifSelesaiObat(int antrianId);
-
+     /**
+     * Fungsi untuk melihat seluruh antrian obat (Dilakukan oleh apoteker)
+     *
+     * @return seluruh antrian obat
+    */
+    public ArrayList<Antrian> getDaftarAntrianObat();
+    
     /**
      * Fungsi untuk melihat antrian saat ini dengan status checkup
      *
@@ -46,7 +35,7 @@ public interface IPelayananService {
      *
      * @return antrian saat ini
     */
-    public Antrian getAntrianCheckupSaatIni(int unitPelayananId);
+    public Antrian getAntrianCheckupSaatIni(int unitServiceId);
 
     /**
      * Fungsi untuk melihat antrian saat ini dengan status obat
@@ -54,16 +43,20 @@ public interface IPelayananService {
      * @return antrian saat ini
     */
     public Antrian getAntrianObatSaatIni();
-
-     /**
-     * Fungsi untuk melihat seluruh antrian obat
-     *
-     * @return seluruh antrian obat
-    */
-    public ArrayList<Antrian> getDaftarAntrianObat();
+    
+    /**
+     * Fungsi ini digunakan dokter ketika submit diagnosa (dilakukan sebelum perawat menekan next antrian)
+     * 
+     * @param dokterId
+     * @param penyakit
+     * @param resep
+     * @return Antrian saat ini
+     */
+    public Antrian submitDiagnosaDanResep(int dokterId, String penyakit, ArrayList<ObatDiagnosa> obat);
+    
 
     /**
-     * Fungsi untuk next antrian saat checkup saat ini
+     * Fungsi untuk next antrian saat checkup saat ini (Dilakukan oleh perawat)
      * pada implementasi antrian saat ini akan dirubah satusnya menjadi AntrianStatus.OBAT
      * dan antrian selanjutnya akan dirubah statusnya menjadi AntrianStatus.CHECKUP
      *
