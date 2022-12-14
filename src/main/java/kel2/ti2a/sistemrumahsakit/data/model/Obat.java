@@ -39,75 +39,105 @@ public class Obat {
     public void setHarga(int harga) {
         this.harga = harga;
     }
-    
-    public ArrayList<Obat> getAll(){
-        ArrayList<Obat> ListObat = new ArrayList();
+
+    public static ArrayList<Obat> getAll() {
+        ArrayList<Obat> ListObat = new ArrayList<>();
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM obat");
-        
+
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 Obat d = new Obat();
                 d.setId(rs.getInt("id"));
                 d.setMerek(rs.getString("merek"));
                 d.setNama(rs.getString("nama"));
-                d.setHarga(rs.getInt("harga"));                
+                d.setHarga(rs.getInt("harga"));
                 ListObat.add(d);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return ListObat;
     }
-    
-    public ArrayList<Obat> search(String s){
-        ArrayList<Obat> ListObat = new ArrayList();
+
+    public static ArrayList<Obat> search(String s) {
+        ArrayList<Obat> ListObat = new ArrayList<>();
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM obat WHERE nama LIKE '%" + s + "%'");
-        
+
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 Obat d = new Obat();
                 d.setId(rs.getInt("id"));
                 d.setMerek(rs.getString("merek"));
                 d.setNama(rs.getString("nama"));
-                d.setHarga(rs.getInt("harga"));                
+                d.setHarga(rs.getInt("harga"));
                 ListObat.add(d);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         return ListObat;
     }
-    
-    public void updateObat(Obat o){
-        String SQL = "UPDATE obat SET merek = '" 
-                + o.getMerek() + "', nama = '"
-                + o.getNama()+ "', harga = '"
-                + o.getHarga()+ "';";
-        
+
+    public static Obat getById(int id) {
+        Obat d = null;
+        ResultSet rs = DBHelper.selectQuery("SELECT * FROM obat WHERE id = '" + id + "'");
+
+        try {
+            if (rs.next()) {
+                d = new Obat();
+                d.setId(rs.getInt("id"));
+                d.setMerek(rs.getString("merek"));
+                d.setNama(rs.getString("nama"));
+                d.setHarga(rs.getInt("harga"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return d;
+    }
+
+    public void save() {
+        if (getById(id) == null) {
+            insertObat();
+        } else {
+            updateObat();
+        }
+    }
+
+    private void updateObat() {
+        String SQL = "UPDATE obat SET merek = '"
+                + getMerek() + "', nama = '"
+                + getNama() + "', harga = '"
+                + getHarga() + "';";
+
         DBHelper.executeQuery(SQL);
     }
-    
-    public void insertObat(Obat o){
-        String SQL = "INSERT INTO obat (merek, nama, harga) VALUES ('" 
-                + o.getMerek() + "', '"
-                + o.getNama()+ "', '"
-                + o.getHarga()+ "');";
-        
+
+    private void insertObat() {
+        String SQL = "INSERT INTO obat (merek, nama, harga) VALUES ('"
+                + getMerek() + "', '"
+                + getNama() + "', '"
+                + getHarga() + "');";
+
         this.id = DBHelper.insertQueryGetId(SQL);
         System.out.println(this.id);
     }
-    
+
     public static void main(String[] args) {
         Obat o = new Obat();
         o.setMerek("Kimia Farm");
         o.setNama("Paracetamol");
         o.setHarga(5000);
-        
-        ArrayList<Obat> aro =  o.search("Para");
-        
-        for(Obat obi : aro){
+
+        // o.save();
+
+        ArrayList<Obat> aro = Obat.search("Para");
+
+        for (Obat obi : aro) {
+            // obi.setHarga(10000);
+            // obi.save();
             System.out.println("Nama : " + obi.getNama());
             System.out.println("Merek : " + obi.getMerek());
             System.out.println("Harga : " + obi.getHarga());
