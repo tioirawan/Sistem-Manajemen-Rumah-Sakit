@@ -95,6 +95,7 @@ public class Dokter extends Karyawan {
 
     @Override
     public void delete() {
+        // TODO: when possible: use cascade on delete karyawan
         DBHelper.executeQuery("DELETE FROM dokter WHERE id = '" + this.dokter_id + "'");
         DBHelper.executeQuery("DELETE FROM karyawan WHERE id = '" + this.id + "'");
     }

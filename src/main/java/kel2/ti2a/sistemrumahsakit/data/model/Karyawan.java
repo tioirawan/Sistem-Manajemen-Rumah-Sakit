@@ -80,22 +80,7 @@ public abstract class Karyawan {
         } else if (type.equalsIgnoreCase("admin")) {
             karyawan = new Admin();
         } else {
-            karyawan = new Karyawan() {
-                @Override
-                public void save() {
-                    return;
-                }
-
-                @Override
-                public void delete() {
-                    return;
-                }
-
-                @Override
-                protected void loadData() {
-                    return;
-                }
-            };
+            return null;
         }
 
         karyawan.setId(rs.getInt("id"));
