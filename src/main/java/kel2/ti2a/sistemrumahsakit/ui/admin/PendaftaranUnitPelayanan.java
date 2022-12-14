@@ -4,7 +4,10 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.admin;
 
-import kel2.ti2a.sistemrumahsakit.ui.common.DataAntrianForm;
+//import kel2.ti2a.sistemrumahsakit.ui.common.DataAntrianForm;
+
+import kel2.ti2a.sistemrumahsakit.ui.common.AntrianForm;
+
 
 /**
  *
@@ -90,7 +93,7 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DataAntrianForm form = new DataAntrianForm("No Antrian anda: 1, ke poli gigi");
+        AntrianForm form = new AntrianForm();
         
         form.setVisible(true);
         this.setVisible(false);
