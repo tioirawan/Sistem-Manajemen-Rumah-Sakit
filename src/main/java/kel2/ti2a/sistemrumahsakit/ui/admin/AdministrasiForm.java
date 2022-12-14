@@ -14,7 +14,7 @@ public class AdministrasiForm extends javax.swing.JFrame {
      * Creates new form AdministrasiForm
      */
     public AdministrasiForm() {
-        initComponents();
+        initComponents(); 
     }
 
     /**
