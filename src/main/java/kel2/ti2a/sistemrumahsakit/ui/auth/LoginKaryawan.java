@@ -5,6 +5,9 @@
 package kel2.ti2a.sistemrumahsakit.ui.auth;
 
 import javax.swing.JOptionPane;
+import kel2.ti2a.sistemrumahsakit.data.model.Karyawan;
+import kel2.ti2a.sistemrumahsakit.data.service.ILoginService;
+import kel2.ti2a.sistemrumahsakit.data.service.implementation.LoginService;
 import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
 import kel2.ti2a.sistemrumahsakit.ui.pelayanan.ManajemenSistemAntrian;
 import kel2.ti2a.sistemrumahsakit.ui.pelayanan.DokterCheckUpForm;
@@ -15,6 +18,7 @@ import kel2.ti2a.sistemrumahsakit.ui.pelayanan.DokterCheckUpForm;
  */
 public class LoginKaryawan extends javax.swing.JFrame {
 
+    ILoginService service = new LoginService();
     /**
      * Creates new form LoginKaryawan
      */
@@ -35,8 +39,8 @@ public class LoginKaryawan extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         fieldNIP = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        fieldPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        fieldPassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -62,16 +66,16 @@ public class LoginKaryawan extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(288, 288, 288)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(199, 199, 199)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                             .addComponent(jLabel1)
                             .addComponent(fieldNIP)
-                            .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(288, 288, 288)
-                        .addComponent(jLabel3)))
+                            .addComponent(fieldPassword))))
                 .addContainerGap(242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,9 +89,9 @@ public class LoginKaryawan extends javax.swing.JFrame {
                 .addComponent(fieldNIP, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(fieldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(161, Short.MAX_VALUE))
         );
@@ -98,8 +102,13 @@ public class LoginKaryawan extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String nip = fieldNIP.getText();
-
-        switch(nip) {
+        String password = String.valueOf(fieldPassword.getPassword());
+        Karyawan k = service.login(nip, password);
+        if(k == null){
+            JOptionPane.showMessageDialog(this, "NIP tidak ditemukan");
+            return;
+        }
+        switch(k.getType()) {
             case "perawat":
                  new ManajemenSistemAntrian().setVisible(true);
                  this.setVisible(false);
@@ -119,7 +128,7 @@ public class LoginKaryawan extends javax.swing.JFrame {
                 this.setVisible(false);
                 break;
             default:
-                JOptionPane.showMessageDialog(this, "NIP tidak ditemukan");
+                
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -162,7 +171,7 @@ public class LoginKaryawan extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField fieldNIP;
-    private javax.swing.JTextField fieldPassword;
+    private javax.swing.JPasswordField fieldPassword;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
