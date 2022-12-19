@@ -19,9 +19,9 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         jLabel8.setVisible(false);
         jLabel9.setVisible(false);
         jLabel10.setVisible(false);
-        jTextField6.setVisible(false);
-        jTextField8.setVisible(false);
-        jTextField9.setVisible(false);
+        asuransiField.setVisible(false);
+        noAsuransiField.setVisible(false);
+        noBPJSField.setVisible(false);
         
     }
 
@@ -35,27 +35,27 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        namaField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jenisComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tglLahirField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        noKtp = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        alamatField = new javax.swing.JTextArea();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        asuransiField = new javax.swing.JTextField();
+        noAsuransiField = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        noBPJSField = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,15 +64,20 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
         jLabel2.setText("Jenis Pasien");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BPJS", "Asuransi", "Umum", " " }));
-        jComboBox1.setSelectedIndex(2);
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jenisComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BPJS", "Asuransi", "Umum", " " }));
+        jenisComboBox.setSelectedIndex(2);
+        jenisComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jenisComboBoxActionPerformed(evt);
             }
         });
 
         jButton1.setText("Simpan");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -94,39 +99,39 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
 
         jLabel6.setText("No. KTP");
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        noKtp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                noKtpActionPerformed(evt);
             }
         });
 
         jLabel7.setText("Alamat");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        alamatField.setColumns(20);
+        alamatField.setRows(5);
+        jScrollPane1.setViewportView(alamatField);
 
         jLabel8.setText("No Asuransi");
 
         jLabel9.setText("Nama Asuransi");
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        asuransiField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                asuransiFieldActionPerformed(evt);
             }
         });
 
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        noAsuransiField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                noAsuransiFieldActionPerformed(evt);
             }
         });
 
         jLabel10.setText("No BPJS");
 
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        noBPJSField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                noBPJSFieldActionPerformed(evt);
             }
         });
 
@@ -161,18 +166,18 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jButton1)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jenisComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(30, 30, 30)
                                             .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jTextField4)
-                                        .addComponent(jTextField1)
-                                        .addComponent(jTextField5)
-                                        .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField8)
-                                        .addComponent(jTextField9)))
+                                        .addComponent(tglLahirField)
+                                        .addComponent(namaField)
+                                        .addComponent(noKtp)
+                                        .addComponent(asuransiField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(noAsuransiField)
+                                        .addComponent(noBPJSField)))
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +197,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
@@ -203,13 +208,13 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tglLahirField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)))
                 .addComponent(jLabel3)
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noKtp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
@@ -217,19 +222,19 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jenisComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(asuransiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noAsuransiField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noBPJSField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(26, 26, 26))
@@ -246,52 +251,56 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void noKtpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noKtpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_noKtpActionPerformed
 
     private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void asuransiFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asuransiFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    }//GEN-LAST:event_asuransiFieldActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jenisComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jenisComboBoxActionPerformed
         // TODO add your handling code here:
-        String value = jComboBox1.getSelectedItem().toString();
+        String value = jenisComboBox.getSelectedItem().toString();
         if (value.equals("BPJS")) {
             jLabel10.setVisible(true);
-            jTextField9.setVisible(true);
+            noBPJSField.setVisible(true);
             jLabel8.setVisible(false);
             jLabel9.setVisible(false);
-            jTextField6.setVisible(false);
-            jTextField8.setVisible(false);
+            asuransiField.setVisible(false);
+            noAsuransiField.setVisible(false);
         } else if (value.equals("Asuransi")) {
             jLabel8.setVisible(true);
             jLabel9.setVisible(true);
-            jTextField6.setVisible(true);
-            jTextField8.setVisible(true);
+            asuransiField.setVisible(true);
+            noAsuransiField.setVisible(true);
             jLabel10.setVisible(false);
-            jTextField9.setVisible(false);
+            noBPJSField.setVisible(false);
         } else{
             jLabel8.setVisible(false);
             jLabel9.setVisible(false);
             jLabel10.setVisible(false);
-            jTextField6.setVisible(false);
-            jTextField8.setVisible(false);
-            jTextField9.setVisible(false);
+            asuransiField.setVisible(false);
+            noAsuransiField.setVisible(false);
+            noBPJSField.setVisible(false);
         }
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jenisComboBoxActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void noAsuransiFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noAsuransiFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_noAsuransiFieldActionPerformed
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void noBPJSFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noBPJSFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_noBPJSFieldActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -330,8 +339,9 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea alamatField;
+    private javax.swing.JTextField asuransiField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -346,12 +356,11 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JComboBox<String> jenisComboBox;
+    private javax.swing.JTextField namaField;
+    private javax.swing.JTextField noAsuransiField;
+    private javax.swing.JTextField noBPJSField;
+    private javax.swing.JTextField noKtp;
+    private javax.swing.JTextField tglLahirField;
     // End of variables declaration//GEN-END:variables
 }
