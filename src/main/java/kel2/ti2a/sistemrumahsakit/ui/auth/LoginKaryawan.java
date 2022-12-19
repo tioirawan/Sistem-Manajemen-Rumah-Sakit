@@ -9,7 +9,7 @@ import kel2.ti2a.sistemrumahsakit.data.model.Karyawan;
 import kel2.ti2a.sistemrumahsakit.data.service.ILoginService;
 import kel2.ti2a.sistemrumahsakit.data.service.implementation.LoginService;
 import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
-import kel2.ti2a.sistemrumahsakit.ui.pelayanan.ApotekerForm;
+import kel2.ti2a.sistemrumahsakit.ui.pelayanan.ApotekerMenu;
 import kel2.ti2a.sistemrumahsakit.ui.pelayanan.ManajemenSistemAntrian;
 import kel2.ti2a.sistemrumahsakit.ui.pelayanan.DokterCheckUpForm;
 
@@ -119,7 +119,7 @@ public class LoginKaryawan extends javax.swing.JFrame {
                 this.setVisible(false);
                 break;
             case "apoteker":
-                 new ApotekerForm().setVisible(true);
+                 new ApotekerMenu().setVisible(true);
                  this.setVisible(false);
                 break;
             case "admin":

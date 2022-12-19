@@ -23,7 +23,7 @@ public interface IAdministrasiService {
      * @return true jika pendaftaran berhasil, false jika pendaftaran gagal
      */
     public boolean daftarkanPasien(Pasien pasien);
-
+    
     /**
      * Fungsi untuk mendaftarkan pasien ke antrian
      *
