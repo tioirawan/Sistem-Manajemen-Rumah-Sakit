@@ -5,6 +5,7 @@
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import kel2.ti2a.sistemrumahsakit.data.model.Obat;
 
@@ -19,6 +20,8 @@ public class ApotekerMenu extends javax.swing.JFrame {
      */
     public ApotekerMenu() {
         initComponents();
+        id.setVisible(false);
+        
         tampilData();
     }
     
@@ -73,9 +76,9 @@ public class ApotekerMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         searchButton.setText("Cari");
         searchButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -100,6 +103,11 @@ public class ApotekerMenu extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableObatMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableObat);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -145,6 +153,8 @@ public class ApotekerMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        id.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -169,7 +179,10 @@ public class ApotekerMenu extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -196,7 +209,9 @@ public class ApotekerMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hargaField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(id))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -239,12 +254,32 @@ public class ApotekerMenu extends javax.swing.JFrame {
        String hargaObat = hargaField.getText();
        
        Obat ob = new Obat();
+       ob.setId(Integer.parseInt(id.getText()));
        ob.setNama(namaObat);
        ob.setMerek(merekObat);
        ob.setHarga(Integer.parseInt(hargaObat));
        
        ob.save();
+       tampilData();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void tableObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableObatMouseClicked
+        JTable source = (JTable)evt.getSource();   
+        int row = source.rowAtPoint(evt.getPoint());
+        String idGet = source.getModel().getValueAt(row, 0)+"";
+        id.setText(idGet);
+       
+        String nama = source.getModel().getValueAt(row, 1)+"";
+        namaField.setText(nama);
+        
+        
+        String merk = source.getModel().getValueAt(row, 2)+"";
+        merekField.setText(merk);
+        
+        
+        String harga = source.getModel().getValueAt(row, 3)+"";
+        hargaField.setText(harga);
+    }//GEN-LAST:event_tableObatMouseClicked
 
     /**
      * @param args the command line arguments
@@ -283,6 +318,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField hargaField;
+    private javax.swing.JLabel id;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
