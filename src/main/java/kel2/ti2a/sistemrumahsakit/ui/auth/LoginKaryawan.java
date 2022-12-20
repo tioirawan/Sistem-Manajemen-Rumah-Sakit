@@ -115,6 +115,7 @@ public class LoginKaryawan extends javax.swing.JFrame {
                  this.setVisible(false);
                 break;
             case "dokter":
+                DokterCheckUpForm
                 new DokterCheckUpForm().setVisible(true);
                 this.setVisible(false);
                 break;

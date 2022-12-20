@@ -17,9 +17,19 @@ public class Diagnosa {
     private int id;
     private int dokter_id;
     private int antrean_id;
+    private int resep_id;
     private String penyakit;
     private String tglDatang;
 
+    public int getResep_id() {
+        return resep_id;
+    }
+
+    public void setResep_id(int resep_id) {
+        this.resep_id = resep_id;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -74,7 +84,7 @@ public class Diagnosa {
                 d.setAntrean_id(rs.getInt("antrean_id"));
                 d.setPenyakit(rs.getString("penyakit"));
                 d.setTglDatang(rs.getString("tglDatang"));
-
+                d.setResep_id(rs.getInt("resep_id"));
                 ListDiagnosa.add(d);
             }
         } catch (Exception e) {
@@ -97,6 +107,7 @@ public class Diagnosa {
                 d.setDokter_id(rs.getInt("dokter_id"));
                 d.setAntrean_id(rs.getInt("antrean_id"));
                 d.setPenyakit(rs.getString("penyakit"));
+                d.setResep_id(rs.getInt("resep_id"));
             }
         } catch (Exception e) {
             e.printStackTrace();

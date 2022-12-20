@@ -4,6 +4,16 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
+import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
+import kel2.ti2a.sistemrumahsakit.data.model.Diagnosa;
+import kel2.ti2a.sistemrumahsakit.data.model.ObatDiagnosa;
+import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
+import kel2.ti2a.sistemrumahsakit.data.model.PasienUmum;
+
 /**
  *
  * @author josaf
@@ -15,6 +25,43 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
      */
     public DokterCheckUpForm() {
         initComponents();
+        tampilData();
+    }
+    public void tampilData(){
+        Antrian a = new Antrian();
+        ResultSet rs = DBHelper.selectQuery(
+                "SELECT * FROM  antrean  WHERE antrean.status = 'CHECKUP'"
+        );
+
+        try {
+            while (rs.next()) {
+                a.setId(rs.getInt("id"));
+                a.setNomorAntrean(rs.getInt("nomorAntrean"));
+                a.setPasien_id(rs.getInt("pasien_id"));
+                a.setStatus(rs.getString("status"));
+                a.setTimestamp(rs.getString("timestamp"));
+                a.setUnitpelayanan_id(rs.getInt("unitPelayanan_id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Pasien p = Pasien.getById(a.getPasien_id());
+        String[] kolom = {"Tanggal", "Penyakit",};
+        ArrayList<Diagnosa> listDiagnosa = new Diagnosa().getDiagnosaByPasienID(a.getPasien_id());
+        Object rowData[] = new Object[2];
+        
+        tabelRiwayat.setModel(new DefaultTableModel(new Object[][] {}, kolom));
+        
+        for(Diagnosa d : listDiagnosa){
+            rowData[0] = d.getTglDatang();
+            rowData[1] = d.getPenyakit();
+            
+            ((DefaultTableModel)tabelRiwayat.getModel()).addRow(rowData);
+        }
+        textNama.setText(p.getNama());
+        textJK.setText(p.getJenisKelamin());
+        textNoPasien.setText(p.getNoPasien());
+        textTtl.setText(p.getTanggaLahir());
     }
 
     /**
@@ -35,9 +82,13 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        textNoPasien = new javax.swing.JLabel();
+        textNama = new javax.swing.JLabel();
+        textJK = new javax.swing.JLabel();
+        textTtl = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelRiwayat = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -79,6 +130,14 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("DATA PASIEN");
 
+        textNoPasien.setText("jLabel5");
+
+        textNama.setText("jLabel5");
+
+        textJK.setText("jLabel5");
+
+        textTtl.setText("jLabel5");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -86,14 +145,23 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textTtl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textNoPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textNama, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(textJK, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -102,21 +170,29 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(textNoPasien))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(textNama))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(textJK))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(textTtl))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(jPanel2);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelRiwayat.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -127,7 +203,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabelRiwayat);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -141,7 +217,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,6 +341,10 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabelRiwayat;
+    private javax.swing.JLabel textJK;
+    private javax.swing.JLabel textNama;
+    private javax.swing.JLabel textNoPasien;
+    private javax.swing.JLabel textTtl;
     // End of variables declaration//GEN-END:variables
 }
