@@ -48,7 +48,7 @@ public abstract class Pasien {
         return nama;
     }
 
-    protected void setNama(String type) {
+    public void setNama(String type) {
         this.nama = type;
     }
 

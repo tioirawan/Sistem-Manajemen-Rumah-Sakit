@@ -4,6 +4,11 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.admin;
 
+import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
+import kel2.ti2a.sistemrumahsakit.data.model.PasienAsuransi;
+import kel2.ti2a.sistemrumahsakit.data.model.PasienBpjs;
+import kel2.ti2a.sistemrumahsakit.data.model.PasienUmum;
+
 /**
  *
  * @author tioirawan
@@ -40,8 +45,8 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         jenisComboBox = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        radioPerempuan = new javax.swing.JRadioButton();
+        radioLaki = new javax.swing.JRadioButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         tglLahirField = new javax.swing.JTextField();
@@ -84,14 +89,14 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
             }
         });
 
-        jRadioButton2.setText("Peremuan");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radioPerempuan.setText("Perempuan");
+        radioPerempuan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radioPerempuanActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("Laki-laki");
+        radioLaki.setText("Laki-laki");
 
         jLabel4.setText("Jenis Kelamin");
 
@@ -169,9 +174,9 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                                         .addComponent(jenisComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(radioLaki, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(30, 30, 30)
-                                            .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(radioPerempuan, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(tglLahirField)
                                         .addComponent(namaField)
                                         .addComponent(noKtp)
@@ -201,8 +206,8 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jRadioButton2)
-                            .addComponent(jRadioButton1))
+                            .addComponent(radioPerempuan)
+                            .addComponent(radioLaki))
                         .addGap(59, 59, 59))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -255,9 +260,9 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_noKtpActionPerformed
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radioPerempuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPerempuanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_radioPerempuanActionPerformed
 
     private void asuransiFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asuransiFieldActionPerformed
         // TODO add your handling code here:
@@ -299,7 +304,45 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     }//GEN-LAST:event_noBPJSFieldActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+             
+        String nama = namaField.getText();
+        String jk = "";
+        if(radioLaki.isSelected()){
+            jk = "Laki-laki";
+        }else{
+            jk = "Perempuan";
+        }
+        String tglLahir = tglLahirField.getText();
+        String ktp = noKtp.getText();
+        String alamat = alamatField.getText();
+        String valueJenis = jenisComboBox.getSelectedItem().toString();
         
+        if(valueJenis.equalsIgnoreCase("bpjs")){
+            String noBpjs = noBPJSField.getText();
+            PasienBpjs p = new PasienBpjs();
+            p.setNama(nama);
+            p.setJenisKelamin(jk);
+            p.setTanggalLahir(tglLahir);
+            p.setType(valueJenis);
+            p.setNoBpjs(noBpjs);
+        }else if(valueJenis.equalsIgnoreCase("asuransi")){
+            String namaAsuransi = asuransiField.getText();
+            String noAsuransi = noAsuransiField.getText();
+            PasienAsuransi p = new PasienAsuransi();
+            p.setNama(nama);
+            p.setJenisKelamin(jk);
+            p.setTanggalLahir(tglLahir);
+            p.setType(valueJenis);
+            p.setNamaAsuransi(namaAsuransi);
+            p.setNoAsuransi(noAsuransi);
+        }
+        
+        PasienUmum p = new PasienUmum();
+        p.setNama(nama);
+        p.setJenisKelamin(jk);
+        p.setTanggalLahir(tglLahir);
+        p.setType(valueJenis);
+        p.setNoKtp(ktp);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -353,14 +396,14 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jenisComboBox;
     private javax.swing.JTextField namaField;
     private javax.swing.JTextField noAsuransiField;
     private javax.swing.JTextField noBPJSField;
     private javax.swing.JTextField noKtp;
+    private javax.swing.JRadioButton radioLaki;
+    private javax.swing.JRadioButton radioPerempuan;
     private javax.swing.JTextField tglLahirField;
     // End of variables declaration//GEN-END:variables
 }
