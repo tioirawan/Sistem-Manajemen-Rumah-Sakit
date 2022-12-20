@@ -83,7 +83,7 @@ public class Antrian {
     
     public static Antrian getById(int noAntrean){
         Antrian antre = null;
-        String sql = "SELECT * FROM antrean WHERE noAntrean = '" + noAntrean + "'";
+        String sql = "SELECT * FROM antrean WHERE nomorAntrean = '" + noAntrean + "'";
         ResultSet rs = DBHelper.selectQuery(sql);
         try {
             if (rs.next()) {
