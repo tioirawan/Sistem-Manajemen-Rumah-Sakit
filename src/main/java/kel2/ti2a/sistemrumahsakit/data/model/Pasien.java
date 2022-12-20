@@ -15,7 +15,7 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
 public abstract class Pasien {
     protected int id;
     protected String noPasien;
-    protected String jensiKelamin;
+    protected String jenisKelamin;
     protected String nama;
     protected String tanggalLahir;
     protected String type;
@@ -37,11 +37,11 @@ public abstract class Pasien {
     }
 
     public String getJenisKelamin() {
-        return jensiKelamin;
+        return jenisKelamin;
     }
 
     public void setJenisKelamin(String nip) {
-        this.jensiKelamin = nip;
+        this.jenisKelamin = nip;
     }
 
     public String getNama() {
