@@ -4,14 +4,36 @@
  */
 package kel2.ti2a.sistemrumahsakit.data.model;
 
+import java.sql.ResultSet;
+import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
+
 /**
  *
  * @author tioirawan
  */
-public abstract class UnitPelayanan {
+public class UnitPelayanan {
     private String nama;
+    private int biayaPelayanan;
+
+    public int getBiayaPelayanan() {
+        return biayaPelayanan;
+    }
+
+    public void setBiayaPelayanan(int biayaPelayanan) {
+        this.biayaPelayanan = biayaPelayanan;
+    }
     private int dokter_id;
 
+    public UnitPelayanan(String nama, int dokter_id, int biayaPelayanan) {
+        this.nama = nama;
+        this.dokter_id = dokter_id;
+        this.biayaPelayanan = biayaPelayanan;
+    }
+    
+    public UnitPelayanan(){
+        
+    }
+    
     public String getNama() {
         return nama;
     }
@@ -27,6 +49,17 @@ public abstract class UnitPelayanan {
     public void setDokter_id(int dokter_id) {
         this.dokter_id = dokter_id;
     }
-    
-    
+        
+    public UnitPelayanan getById(int id) {
+        UnitPelayanan up = null;
+        String sql = "SELECT * FROM unitpelayanan WHERE id = '"
+                + id +"'";
+        ResultSet rs = DBHelper.selectQuery(sql);
+        try {
+            up = new UnitPelayanan(rs.getString("nama"), rs.getInt("dokter_id"), rs.getInt("biayaPelayanan"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return up;
+    }
 }

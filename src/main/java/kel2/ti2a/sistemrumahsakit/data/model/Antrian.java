@@ -89,7 +89,10 @@ public class Antrian {
         
         return listAntrian;
     }
-   
+    
+    public boolean insertIntoAntrean(){
+        
+    }
 }
 
 

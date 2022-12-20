@@ -41,7 +41,7 @@ public class AdministrasiService implements IAdministrasiService{
 
     @Override
     public Antrian daftarkanPasienKeAntrian(int nomorPasien, int unitPelayananId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
     }
 
     @Override
