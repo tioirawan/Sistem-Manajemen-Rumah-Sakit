@@ -5,6 +5,7 @@
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
 import java.util.ArrayList;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import kel2.ti2a.sistemrumahsakit.data.model.Obat;
 
@@ -99,6 +100,11 @@ public class ApotekerMenu extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tableObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableObatMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableObat);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -244,6 +250,13 @@ public class ApotekerMenu extends javax.swing.JFrame {
        
        ob.save();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void tableObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableObatMouseClicked
+        JTable source = (JTable)evt.getSource();   
+        int row = source.rowAtPoint(evt.getPoint());
+        String nama = source.getModel().getValueAt(row, 1)+"";
+        namaField.setText(nama);
+    }//GEN-LAST:event_tableObatMouseClicked
 
     /**
      * @param args the command line arguments

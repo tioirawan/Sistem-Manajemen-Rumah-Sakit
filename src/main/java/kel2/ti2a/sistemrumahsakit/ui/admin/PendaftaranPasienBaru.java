@@ -308,9 +308,9 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
         String nama = namaField.getText();
         String jk = "";
         if(radioLaki.isSelected()){
-            jk = "Laki-laki";
+            jk = "L";
         }else{
-            jk = "Perempuan";
+            jk = "P";
         }
         String tglLahir = tglLahirField.getText();
         String ktp = noKtp.getText();
@@ -325,6 +325,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
             p.setTanggalLahir(tglLahir);
             p.setType(valueJenis);
             p.setNoBpjs(noBpjs);
+            p.save();
         }else if(valueJenis.equalsIgnoreCase("asuransi")){
             String namaAsuransi = asuransiField.getText();
             String noAsuransi = noAsuransiField.getText();
@@ -335,14 +336,16 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
             p.setType(valueJenis);
             p.setNamaAsuransi(namaAsuransi);
             p.setNoAsuransi(noAsuransi);
-        }
-        
-        PasienUmum p = new PasienUmum();
-        p.setNama(nama);
-        p.setJenisKelamin(jk);
-        p.setTanggalLahir(tglLahir);
-        p.setType(valueJenis);
-        p.setNoKtp(ktp);
+            p.save();
+        }else{
+            PasienUmum p = new PasienUmum();
+            p.setNama(nama);
+            p.setJenisKelamin(jk);
+            p.setTanggalLahir(tglLahir);
+            p.setType(valueJenis);
+            p.setNoKtp(ktp);
+            p.save();
+        }        
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**

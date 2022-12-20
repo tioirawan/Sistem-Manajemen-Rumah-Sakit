@@ -62,7 +62,7 @@ public class PasienUmum extends Pasien{
             id = DBHelper.insertQueryGetId(SQL);
 
             String SQL2 = "INSERT INTO pasienumum (pasien_id, noKtp) VALUES ("
-                    + " '" + this.id + "' "
+                    + " '" + this.id + "' ,"
                     + " '" + this.noKtp + "' "
                     + " )";
 
