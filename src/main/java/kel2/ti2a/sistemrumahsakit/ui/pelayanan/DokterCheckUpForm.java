@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.data.model.Diagnosa;
+import kel2.ti2a.sistemrumahsakit.data.model.Dokter;
 import kel2.ti2a.sistemrumahsakit.data.model.ObatDiagnosa;
 import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
 import kel2.ti2a.sistemrumahsakit.data.model.PasienUmum;
@@ -25,7 +26,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
      */
     
     
-    public DokterCheckUpForm() {
+    public DokterCheckUpForm(Dokter d) {
         initComponents();
         tampilData();
     }
@@ -330,7 +331,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DokterCheckUpForm().setVisible(true);
+//                new DokterCheckUpForm().setVisible(true);
             }
         });
     }

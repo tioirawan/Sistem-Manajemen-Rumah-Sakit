@@ -44,8 +44,7 @@ public class AdministrasiService implements IAdministrasiService{
         Antrian antre = null;
         try {
             antre = new Antrian();
-//            antre.insertIntoAntrean(nomorPasien, unitPelayananId); 
-            
+            antre.insertIntoAntrean(nomorPasien, unitPelayananId);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,7 +5,9 @@
 package kel2.ti2a.sistemrumahsakit.ui.auth;
 
 import javax.swing.JOptionPane;
+import kel2.ti2a.sistemrumahsakit.data.model.Dokter;
 import kel2.ti2a.sistemrumahsakit.data.model.Karyawan;
+import kel2.ti2a.sistemrumahsakit.data.model.Perawat;
 import kel2.ti2a.sistemrumahsakit.data.service.ILoginService;
 import kel2.ti2a.sistemrumahsakit.data.service.implementation.LoginService;
 import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
@@ -111,12 +113,13 @@ public class LoginKaryawan extends javax.swing.JFrame {
         }
         switch(k.getType()) {
             case "perawat":
-                 new ManajemenSistemAntrian().setVisible(true);
+                 ManajemenSistemAntrian msa = new ManajemenSistemAntrian((Perawat) k);
+                 msa.setVisible(true);
                  this.setVisible(false);
                 break;
             case "dokter":
-                DokterCheckUpForm
-                new DokterCheckUpForm().setVisible(true);
+                DokterCheckUpForm dcuf = new DokterCheckUpForm((Dokter) k);
+                dcuf.setVisible(true);
                 this.setVisible(false);
                 break;
             case "apoteker":

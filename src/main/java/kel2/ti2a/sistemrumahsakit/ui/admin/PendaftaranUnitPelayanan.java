@@ -6,6 +6,9 @@ package kel2.ti2a.sistemrumahsakit.ui.admin;
 
 //import kel2.ti2a.sistemrumahsakit.ui.common.DataAntrianForm;
 
+import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
+import kel2.ti2a.sistemrumahsakit.data.model.UnitPelayanan;
+import kel2.ti2a.sistemrumahsakit.data.service.implementation.AdministrasiService;
 import kel2.ti2a.sistemrumahsakit.ui.common.AntrianForm;
 
 
@@ -32,9 +35,9 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        idPasienField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        unitPelayananComboBox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,18 +45,23 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
 
         jLabel1.setText("ID Pasien");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        idPasienField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                idPasienFieldActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Unit Pelayanan");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Poli Gigi", "THT", "Umum", "Poli Anak", "Poli Paru" }));
+        unitPelayananComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Poli Gigi", "THT", "Umum", "Poli Anak", "Poli Paru" }));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("DAFTAR");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -67,9 +75,9 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, 588, Short.MAX_VALUE)
+                    .addComponent(unitPelayananComboBox, javax.swing.GroupLayout.Alignment.TRAILING, 0, 588, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
+                    .addComponent(idPasienField)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -83,11 +91,11 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(idPasienField, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(12, 12, 12)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(unitPelayananComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(30, Short.MAX_VALUE))
@@ -98,15 +106,25 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        AntrianForm form = new AntrianForm();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void idPasienFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idPasienFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idPasienFieldActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        String idPasien = idPasienField.getText();
+        String unitPelayanan = unitPelayananComboBox.getSelectedItem().toString();
+        
+        AdministrasiService as = new AdministrasiService();
+        Antrian an = as.daftarkanPasienKeAntrian(Integer.parseInt(idPasien), UnitPelayanan.getIdUnitPelayananByName(unitPelayanan));
+        System.out.println(an.getPasien_id());
+        AntrianForm form = new AntrianForm(an);
         
         form.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -145,10 +163,10 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField idPasienField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> unitPelayananComboBox;
     // End of variables declaration//GEN-END:variables
 }

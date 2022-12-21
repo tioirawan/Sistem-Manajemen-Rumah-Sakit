@@ -60,7 +60,7 @@ public class Antrian {
         this.status = status;
     }
     
-    public ArrayList<Antrian> getAntrianByUnitPelayanan(int id){
+    public static ArrayList<Antrian> getAntrianByUnitPelayanan(int id){
         ArrayList<Antrian> listAntrian = new ArrayList();
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"'");
         try{
@@ -98,6 +98,65 @@ public class Antrian {
         }
         return antre;
     }
+    
+    public static Antrian getAntrianCheckupByUnitPelayanan(int id){
+        Antrian an = new Antrian();
+        ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP'");
+        try{
+            while (rs.next()) {
+                an.setNomorAntrean(rs.getInt("nomorAntrean"));
+                an.setPasien_id(rs.getInt("pasien_id"));
+                an.setStatus(rs.getString("status"));
+                an.setTimestamp(rs.getString("timestamp"));
+                an.setUnitpelayanan_id(rs.getInt("unitPelayanan_id"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return an;
+    }
+    
+    public static int getLatestNoAntreanByUnitPelayanan(int id){
+        int noAntrean = 0;
+        ResultSet rs = DBHelper.selectQuery("SELECT MIN(nomorAntrean) AS no FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'ANTRI'");
+        try{
+            while (rs.next()) {
+                noAntrean = rs.getInt("no");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return noAntrean;
+    }
+    
+    public static int getLatestCheckupByUnitPelayanan(int id){
+        int noAntrean = 0;
+        ResultSet rs = DBHelper.selectQuery("SELECT MIN(nomorAntrean) AS no FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP'");
+        try{
+            while (rs.next()) {
+                noAntrean = rs.getInt("no");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return noAntrean;
+    }
+    
+    public static Boolean nextAntrian(int unitPelayanan){
+        Boolean statusNext = false;
+        
+        String sqlUpdate = "UPDATE antrean SET status = 'OBAT' WHERE unitpelayanan_id = " + unitPelayanan + " AND pasien_id = '" + String.valueOf(getLatestCheckupByUnitPelayanan(unitPelayanan)) + "'";
+        DBHelper.executeQuery(sqlUpdate);
+        
+        String sqlUpdateCheckUp = "UPDATE antrean SET status = 'CHECKUP' WHERE unitpelayanan_id = " + unitPelayanan + " AND pasien_id = '" + String.valueOf(getLatestNoAntreanByUnitPelayanan(unitPelayanan)) + "'";
+        statusNext = DBHelper.executeQuery(sqlUpdateCheckUp);
+        
+        return statusNext;
+    }
+    
     
     public boolean insertIntoAntrean(int pasien_id, int unitpelayanan_id){
         if (Antrian.getById(nomorAntrean) == null) {

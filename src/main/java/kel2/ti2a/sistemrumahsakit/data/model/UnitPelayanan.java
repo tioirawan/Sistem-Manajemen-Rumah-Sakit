@@ -50,16 +50,33 @@ public class UnitPelayanan {
         this.dokter_id = dokter_id;
     }
         
-    public UnitPelayanan getById(int id) {
+    public static UnitPelayanan getById(int id) {
         UnitPelayanan up = null;
         String sql = "SELECT * FROM unitpelayanan WHERE id = '"
                 + id +"'";
         ResultSet rs = DBHelper.selectQuery(sql);
         try {
-            up = new UnitPelayanan(rs.getString("nama"), rs.getInt("dokter_id"), rs.getInt("biayaPelayanan"));
+            if (rs.next()) {
+                up = new UnitPelayanan(rs.getString("nama"), rs.getInt("dokter_id"), rs.getInt("biayaPelayanan"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return up;
+    }
+    
+    public static int getIdUnitPelayananByName(String nama){
+        int id = 0;
+        String sql = "SELECT * FROM unitpelayanan WHERE nama = '"
+                + nama +"'";
+        ResultSet rs = DBHelper.selectQuery(sql);
+        try {
+            if (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return id;
     }
 }

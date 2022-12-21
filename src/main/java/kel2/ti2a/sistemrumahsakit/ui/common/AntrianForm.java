@@ -5,6 +5,7 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.common;
 
+import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.ui.admin.AdministrasiForm;
 /**
  *
@@ -15,8 +16,12 @@ public class AntrianForm extends javax.swing.JFrame {
     /**
      * Creates new form Antrian
      */
-    public AntrianForm() {
+    public AntrianForm(Antrian an) {
         initComponents();
+//        noAntrianLabel.setVisible(false);
+//        noAntrianSaatIni.setVisible(false);
+        noAntrianLabel.setText(String.valueOf(an.getNomorAntrean()));
+        noAntrianSaatIni.setText(String.valueOf(an.getAntrianByUnitPelayanan(an.getUnitpelayanan_id())));
     }
 
     /**
@@ -29,10 +34,10 @@ public class AntrianForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        noAntrianSaatIni = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        noAntrianLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -40,8 +45,8 @@ public class AntrianForm extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("No Antrian Saat Ini                     :");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel2.setText("jLabel2");
+        noAntrianSaatIni.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        noAntrianSaatIni.setText("jLabel2");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel3.setText("Data Antrian");
@@ -49,8 +54,8 @@ public class AntrianForm extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel6.setText("No Antrian Anda                         :");
 
-        jLabel7.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel7.setText("jLabel2");
+        noAntrianLabel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        noAntrianLabel.setText("jLabel2");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jButton1.setText("OK");
@@ -73,8 +78,8 @@ public class AntrianForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(noAntrianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(noAntrianSaatIni, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(176, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -92,10 +97,10 @@ public class AntrianForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(30, 30, 30)
-                .addComponent(jLabel7)
+                .addComponent(noAntrianLabel)
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(noAntrianSaatIni)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
                 .addComponent(jButton1)
@@ -150,7 +155,7 @@ public class AntrianForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AntrianForm().setVisible(true);
+//                new AntrianForm().setVisible(true);
             }
         });
     }
@@ -158,9 +163,9 @@ public class AntrianForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel noAntrianLabel;
+    private javax.swing.JLabel noAntrianSaatIni;
     // End of variables declaration//GEN-END:variables
 }
