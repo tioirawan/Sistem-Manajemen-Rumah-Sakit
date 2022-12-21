@@ -110,7 +110,7 @@ public class Obat {
         String SQL = "UPDATE obat SET merek = '"
                 + getMerek() + "', nama = '"
                 + getNama() + "', harga = '"
-                + getHarga() + "';";
+                + getHarga() + "' WHERE id = " + getId() + ";";
 
         DBHelper.executeQuery(SQL);
     }

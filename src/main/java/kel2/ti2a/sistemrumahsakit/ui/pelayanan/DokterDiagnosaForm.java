@@ -4,6 +4,13 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import kel2.ti2a.sistemrumahsakit.data.model.Diagnosa;
+import kel2.ti2a.sistemrumahsakit.data.model.Dokter;
+import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
+
 /**
  *
  * @author josaf
@@ -13,8 +20,22 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
     /**
      * Creates new form DokterDiagnosaForm
      */
-    public DokterDiagnosaForm() {
+    public DokterDiagnosaForm(int pasienId, Dokter dokter) {
         initComponents();
+        dokterIdText.setVisible(false);
+        dokterIdText.setText(String.valueOf(dokter.getDokterId()));
+        pasienText.setText(String.valueOf(pasienId));
+        pasienText.setVisible(false);
+        karyawanIdText.setText(String.valueOf(dokter.getKaryawan_id()));
+        setDataPasien(pasienId);
+    }
+    
+    public void setDataPasien(int pasienId){
+        Pasien p = Pasien.getById(pasienId);
+        noPasienText.setText(p.getNoPasien());
+        namaPasienText.setText(p.getNama());
+        jenisKelaminText.setText(p.getJenisKelamin());
+        tanggalLahirText.setText(p.getTanggaLahir());
     }
 
     /**
@@ -32,20 +53,26 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        noPasienText = new javax.swing.JLabel();
+        namaPasienText = new javax.swing.JLabel();
+        jenisKelaminText = new javax.swing.JLabel();
+        tanggalLahirText = new javax.swing.JLabel();
+        dokterIdText = new javax.swing.JLabel();
+        pasienText = new javax.swing.JLabel();
+        karyawanIdText = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        diagnosaText = new javax.swing.JTextPane();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        resepTextPane = new javax.swing.JTextPane();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
-        setPreferredSize(new java.awt.Dimension(900, 620));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -63,6 +90,24 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel5.setText("Tanggal Lahir");
 
+        noPasienText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        noPasienText.setText("No Pasien");
+
+        namaPasienText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        namaPasienText.setText("Nama Pasien");
+
+        jenisKelaminText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jenisKelaminText.setText("Jenis Kelamin");
+
+        tanggalLahirText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tanggalLahirText.setText("Tanggal Lahir");
+
+        dokterIdText.setText("jLabel9");
+
+        pasienText.setText("jLabel9");
+
+        karyawanIdText.setText("jLabel9");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -70,7 +115,9 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,8 +125,21 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(noPasienText)
+                            .addComponent(namaPasienText)
+                            .addComponent(jenisKelaminText)
+                            .addComponent(tanggalLahirText))
+                        .addGap(25, 25, 25))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(karyawanIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dokterIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70)
+                .addComponent(pasienText, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,13 +147,29 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(noPasienText)
+                        .addGap(18, 18, 18)
+                        .addComponent(namaPasienText)
+                        .addGap(18, 18, 18)
+                        .addComponent(jenisKelaminText)
+                        .addGap(18, 18, 18)
+                        .addComponent(tanggalLahirText)))
+                .addGap(119, 119, 119)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dokterIdText)
+                    .addComponent(pasienText))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(karyawanIdText)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -117,12 +193,12 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Diagnosa");
 
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(diagnosaText);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Resep");
 
-        jScrollPane2.setViewportView(jTextPane2);
+        jScrollPane2.setViewportView(resepTextPane);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("SELESAI");
@@ -193,7 +269,16 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-//        new DokterCheckUpForm().setVisible(true);
+        Diagnosa d = new Diagnosa();
+        d.setDokter_id(Integer.parseInt(dokterIdText.getText()));
+        d.setPasien_id(Integer.parseInt(pasienText.getText()));
+        System.out.println(noPasienText.getText());
+        d.setPenyakit(diagnosaText.getText());
+        d.setResep(resepTextPane.getText());
+//        d.setTglDatang(String.valueOf(now));
+
+        d.save();
+        new DokterCheckUpForm((Dokter) Dokter.getById(Integer.parseInt(karyawanIdText.getText()))).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -227,12 +312,14 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DokterDiagnosaForm().setVisible(true);
+//                new DokterDiagnosaForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextPane diagnosaText;
+    private javax.swing.JLabel dokterIdText;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -247,7 +334,12 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JLabel jenisKelaminText;
+    private javax.swing.JLabel karyawanIdText;
+    private javax.swing.JLabel namaPasienText;
+    private javax.swing.JLabel noPasienText;
+    private javax.swing.JLabel pasienText;
+    private javax.swing.JTextPane resepTextPane;
+    private javax.swing.JLabel tanggalLahirText;
     // End of variables declaration//GEN-END:variables
 }

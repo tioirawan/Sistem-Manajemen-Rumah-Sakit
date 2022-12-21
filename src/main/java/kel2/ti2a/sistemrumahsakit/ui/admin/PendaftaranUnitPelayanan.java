@@ -119,7 +119,6 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
         
         AdministrasiService as = new AdministrasiService();
         Antrian an = as.daftarkanPasienKeAntrian(Integer.parseInt(idPasien), UnitPelayanan.getIdUnitPelayananByName(unitPelayanan));
-        System.out.println(an.getPasien_id());
         AntrianForm form = new AntrianForm(an);
         
         form.setVisible(true);

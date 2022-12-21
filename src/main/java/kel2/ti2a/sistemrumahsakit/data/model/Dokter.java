@@ -13,11 +13,16 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
  * @author tioirawan
  */
 public class Dokter extends Karyawan {
-
+    private int unitPelayananId;
     private int dokter_id;
+    private int karyawan_id;
     private String status; // koas, dokter, spesialis
     private int tarif;
 
+    public int getUnitPelayananId() {
+        return unitPelayananId;
+    }
+    
     public int getDokterId() {
         return dokter_id;
     }
@@ -42,6 +47,28 @@ public class Dokter extends Karyawan {
         this.tarif = tarif;
     }
 
+    public int getKaryawan_id() {
+        return karyawan_id;
+    }
+
+    public void setKaryawan_id(int karyawan_id) {
+        this.karyawan_id = karyawan_id;
+    }   
+    
+    public static int getUnitPelayananIdByDokterId(int dokter_id){
+        int unitPelayananId = 0;
+        ResultSet rs = DBHelper.selectQuery("SELECT up.id FROM dokter d LEFT JOIN unitpelayanan up ON d.id = up.dokter_id WHERE d.id =" + dokter_id + "");
+        try{
+            while (rs.next()) {
+                unitPelayananId = rs.getInt("id");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return unitPelayananId;
+    }
+
     @Override
     protected void loadData() {
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM dokter WHERE karyawan_id = " + this.id);
@@ -49,6 +76,7 @@ public class Dokter extends Karyawan {
         try {
             if (rs.next()) {
                 this.dokter_id = rs.getInt("id");
+                this.karyawan_id = rs.getInt("karyawan_id");
                 this.status = rs.getString("status");
                 this.tarif = rs.getInt("tarif");
             }
@@ -56,7 +84,9 @@ public class Dokter extends Karyawan {
             e.printStackTrace();
         }
     }
-
+    
+    
+    
     @Override
     public void save() {
         if (Karyawan.getById(id) == null) {

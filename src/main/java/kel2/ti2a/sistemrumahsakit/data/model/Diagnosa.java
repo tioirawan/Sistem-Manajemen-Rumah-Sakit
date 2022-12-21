@@ -16,17 +16,17 @@ public class Diagnosa {
 
     private int id;
     private int dokter_id;
-    private int antrean_id;
-    private int resep_id;
+    private int pasien_id;
+    private String resep;
     private String penyakit;
     private String tglDatang;
 
-    public int getResep_id() {
-        return resep_id;
+    public String getResep() {
+        return resep;
     }
 
-    public void setResep_id(int resep_id) {
-        this.resep_id = resep_id;
+    public void setResep(String resep_id) {
+        this.resep = resep_id;
     }
     
     
@@ -46,12 +46,12 @@ public class Diagnosa {
         this.dokter_id = dokter_id;
     }
 
-    public int getAntrean_id() {
-        return antrean_id;
+    public int getPasien_id() {
+        return pasien_id;
     }
 
-    public void setAntrean_id(int antrean_id) {
-        this.antrean_id = antrean_id;
+    public void setPasien_id(int pasien_id) {
+        this.pasien_id = pasien_id;
     }
 
     public String getPenyakit() {
@@ -72,8 +72,12 @@ public class Diagnosa {
 
     public static ArrayList<Diagnosa> getDiagnosaByPasienID(int id) {
         ArrayList<Diagnosa> ListDiagnosa = new ArrayList();
+//        ResultSet rs = DBHelper.selectQuery(
+//            "SELECT * FROM diagnosa JOIN antrean ON diagnosa.antrean_id = antrean.id WHERE antrean.pasien_id = " + id + " ORDER BY diagnosa.id DESC"
+//        );
+        
         ResultSet rs = DBHelper.selectQuery(
-                "SELECT * FROM diagnosa JOIN antrean ON diagnosa.antrean_id = antrean.id WHERE antrean.pasien_id = " + id + " ORDER BY diagnosa.id DESC"
+            "SELECT * FROM diagnosa WHERE pasien_id = " + id + " ORDER BY diagnosa.id DESC"
         );
 
         try {
@@ -81,10 +85,10 @@ public class Diagnosa {
                 Diagnosa d = new Diagnosa();
                 d.setId(rs.getInt("id"));
                 d.setDokter_id(rs.getInt("dokter_id"));
-                d.setAntrean_id(rs.getInt("antrean_id"));
+                d.setPasien_id(rs.getInt("pasien_id"));
                 d.setPenyakit(rs.getString("penyakit"));
                 d.setTglDatang(rs.getString("tglDatang"));
-                d.setResep_id(rs.getInt("resep_id"));
+                d.setResep(rs.getString("resep"));
                 ListDiagnosa.add(d);
             }
         } catch (Exception e) {
@@ -105,9 +109,9 @@ public class Diagnosa {
                 d = new Diagnosa();
                 d.setId(rs.getInt("id"));
                 d.setDokter_id(rs.getInt("dokter_id"));
-                d.setAntrean_id(rs.getInt("antrean_id"));
+                d.setPasien_id(rs.getInt("antrean_id"));
                 d.setPenyakit(rs.getString("penyakit"));
-                d.setResep_id(rs.getInt("resep_id"));
+                d.setResep(rs.getString("resep"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,10 +129,11 @@ public class Diagnosa {
     }
 
     protected void add() {
-         String SQL = "INSERT INTO diagnosa (dokter_id, antrean_id, penyakit) VALUES("
+         String SQL = "INSERT INTO diagnosa (dokter_id, resep, penyakit, pasien_id) VALUES("
                 + "'" + this.dokter_id + "', "
-                + "'" + this.antrean_id + "', "
-                + "'" + this.penyakit + "'"
+                + "'" + this.resep + "', "
+                + "'" + this.penyakit + "', "
+                + "'" + this.pasien_id + "'"
                 + ")";
                 
         this.id = DBHelper.insertQueryGetId(SQL);
@@ -137,8 +142,10 @@ public class Diagnosa {
     protected void update() {
         String SQL = "UPDATE diagnosa SET "
                 + "dokter_id = '" + this.dokter_id + "', "
-                + "antrean_id = '" + this.antrean_id + "', "
-                + "penyakit = '" + this.penyakit + "' "
+                + "resep = '" + this.resep+ "', "
+                + "penyakit = '" + this.penyakit + "', '"
+                + "tglDatang = '" + this.tglDatang + "', '"
+                + "pasien_id = '" + this.pasien_id + "'"
                 + "WHERE id = '" + this.id + "'";
                 
         DBHelper.executeQuery(SQL);

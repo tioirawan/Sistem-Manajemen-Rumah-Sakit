@@ -20,8 +20,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
      */
     public ApotekerMenu() {
         initComponents();
-        id.setVisible(false);
-        
+        idObat.setVisible(false);
         tampilData();
     }
     
@@ -76,7 +75,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        id = new javax.swing.JLabel();
+        idObat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,7 +152,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        id.setText("jLabel5");
+        idObat.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -182,7 +181,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(idObat, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37))
         );
         jPanel1Layout.setVerticalGroup(
@@ -211,7 +210,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(id))
+                        .addComponent(idObat))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 457, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -254,7 +253,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
        String hargaObat = hargaField.getText();
        
        Obat ob = new Obat();
-       ob.setId(Integer.parseInt(id.getText()));
+       ob.setId(Integer.parseInt(idObat.getText()));
        ob.setNama(namaObat);
        ob.setMerek(merekObat);
        ob.setHarga(Integer.parseInt(hargaObat));
@@ -268,7 +267,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
         int row = source.rowAtPoint(evt.getPoint());
 
         String idGet = source.getModel().getValueAt(row, 0)+"";
-        id.setText(idGet);
+        idObat.setText(idGet);
        
         String nama = source.getModel().getValueAt(row, 1)+"";
         namaField.setText(nama);
@@ -319,7 +318,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField hargaField;
-    private javax.swing.JLabel id;
+    private javax.swing.JLabel idObat;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

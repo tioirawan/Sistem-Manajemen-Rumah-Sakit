@@ -28,35 +28,28 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     
     public DokterCheckUpForm(Dokter d) {
         initComponents();
-        tampilData();
+        dokterId.setVisible(false);
+        dokterId.setText(String.valueOf(d.getDokterId()));
+        karyawanId.setVisible(false);
+        karyawanId.setText(String.valueOf(d.getKaryawan_id()));
+        pasienId.setVisible(false);
+        tampilData(d.getDokterId());
     }
-    public void tampilData(){
-        Antrian a = new Antrian();
-        ResultSet rs = DBHelper.selectQuery(
-                "SELECT * FROM  antrean  WHERE antrean.status = 'CHECKUP'"
-        );
-
-        try {
-            while (rs.next()) {
-                a.setNomorAntrean(rs.getInt("nomorAntrean"));
-                a.setPasien_id(rs.getInt("pasien_id"));
-                a.setStatus(rs.getString("status"));
-                a.setTimestamp(rs.getString("timestamp"));
-                a.setUnitpelayanan_id(rs.getInt("unitPelayanan_id"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    
+    public void tampilData(int dokter){
+        Antrian a = Antrian.getAntrianCheckupByUnitPelayanan(Dokter.getUnitPelayananIdByDokterId(dokter));
+        
         Pasien p = Pasien.getById(a.getPasien_id());
-        String[] kolom = {"Tanggal", "Penyakit",};
+        String[] kolom = {"Tanggal", "Penyakit", "Resep"};
         ArrayList<Diagnosa> listDiagnosa = new Diagnosa().getDiagnosaByPasienID(a.getPasien_id());
-        Object rowData[] = new Object[2];
+        Object rowData[] = new Object[3];
         
         tabelRiwayat.setModel(new DefaultTableModel(new Object[][] {}, kolom));
         
         for(Diagnosa d : listDiagnosa){
             rowData[0] = d.getTglDatang();
             rowData[1] = d.getPenyakit();
+            rowData[2] = d.getResep();
             
             ((DefaultTableModel)tabelRiwayat.getModel()).addRow(rowData);
         }
@@ -64,6 +57,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         textJK.setText(p.getJenisKelamin());
         textNoPasien.setText(p.getNoPasien());
         textTtl.setText(p.getTanggaLahir());
+        pasienId.setText(String.valueOf(p.getId()));
     }
 
     /**
@@ -93,7 +87,9 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         tabelRiwayat = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        testId = new javax.swing.JLabel();
+        dokterId = new javax.swing.JLabel();
+        karyawanId = new javax.swing.JLabel();
+        pasienId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 620));
@@ -106,6 +102,11 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Refresh");
         jButton1.setBorder(null);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -148,23 +149,19 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textTtl, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textNoPasien, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textNama, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(textJK, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textTtl, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(textJK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textNama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textNoPasien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -243,7 +240,11 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
             }
         });
 
-        testId.setText("jLabel5");
+        dokterId.setText("jLabel5");
+
+        karyawanId.setText("jLabel5");
+
+        pasienId.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -255,8 +256,12 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
                     .addComponent(jSplitPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(214, 214, 214)
-                        .addComponent(testId)
+                        .addGap(111, 111, 111)
+                        .addComponent(dokterId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(karyawanId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(pasienId, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -269,7 +274,9 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(testId))
+                    .addComponent(dokterId)
+                    .addComponent(karyawanId)
+                    .addComponent(pasienId))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 474, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,9 +304,13 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-       new DokterDiagnosaForm().setVisible(true);
+       new DokterDiagnosaForm(Integer.parseInt(pasienId.getText()), (Dokter) Dokter.getById(Integer.parseInt(karyawanId.getText()))).setVisible(true);
        this.setVisible(false);
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        tampilData(Integer.parseInt(dokterId.getText()));
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -337,6 +348,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dokterId;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -350,8 +362,9 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JLabel karyawanId;
+    private javax.swing.JLabel pasienId;
     private javax.swing.JTable tabelRiwayat;
-    private javax.swing.JLabel testId;
     private javax.swing.JLabel textJK;
     private javax.swing.JLabel textNama;
     private javax.swing.JLabel textNoPasien;
