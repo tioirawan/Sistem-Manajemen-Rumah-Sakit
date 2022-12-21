@@ -4,6 +4,11 @@
  */
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
+import java.util.ArrayList;
+import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
+import kel2.ti2a.sistemrumahsakit.data.model.Perawat;
+import kel2.ti2a.sistemrumahsakit.data.model.UnitPelayanan;
+
 /**
  *
  * @author tioirawan
@@ -13,8 +18,24 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     /**
      * Creates new form PilihUnitPelayananForm
      */
-    public ManajemenSistemAntrian() {
+    public ManajemenSistemAntrian(Perawat p) {
         initComponents();
+        idPerawat.setVisible(false);
+        idUnitPelayanan.setVisible(false);
+        idPerawat.setText(String.valueOf(p.getId()));
+        idUnitPelayanan.setText(String.valueOf(p.getUnit_pelayanan_id()));
+        setUnitPelayananLabel(p.getUnit_pelayanan_id());
+        setAntrianLabel(p.getUnit_pelayanan_id());
+    }
+    
+    public void setUnitPelayananLabel(int unitPelayananId){
+        UnitPelayanan up = UnitPelayanan.getById(unitPelayananId);
+        unitPelayananLabel.setText(up.getNama());
+    }
+    
+    public void setAntrianLabel(int unitPelayananId){
+        Antrian an = Antrian.getAntrianCheckupByUnitPelayanan(unitPelayananId);
+        antrianLabel.setText(String.valueOf(an.getNomorAntrean()));
     }
 
     /**
@@ -26,33 +47,40 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        unitPelayananLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        antrianLabel = new javax.swing.JLabel();
+        idPerawat = new javax.swing.JLabel();
+        idUnitPelayanan = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel1.setText("Sistem Antrian              : Poli Gigi");
+        unitPelayananLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        unitPelayananLabel.setText("Sistem Antrian              : Poli Gigi");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel2.setText("Antrian saat ini             : ");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jButton1.setText("Selanjutnya");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        jLabel3.setText("Sisa antrian: 99");
+        antrianLabel.setFont(new java.awt.Font("Times New Roman", 0, 80)); // NOI18N
+        antrianLabel.setText("12");
 
-        jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 80)); // NOI18N
-        jLabel4.setText("12");
+        idPerawat.setText("jLabel3");
+
+        idUnitPelayanan.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,31 +90,37 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(unitPelayananLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton1)
+                        .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(21, 21, 21))
+                        .addGap(0, 555, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(antrianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(268, 268, 268))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(196, 196, 196)
+                .addComponent(idUnitPelayanan)
+                .addGap(40, 40, 40)
+                .addComponent(idPerawat)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(unitPelayananLabel)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(103, 103, 103)
+                    .addComponent(idPerawat)
+                    .addComponent(idUnitPelayanan))
+                .addGap(45, 45, 45)
                 .addComponent(jLabel2)
                 .addGap(16, 16, 16)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(antrianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(32, 32, 32))
@@ -98,6 +132,10 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       Antrian.nextAntrian(Integer.parseInt(idUnitPelayanan.getText()));
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -132,16 +170,17 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManajemenSistemAntrian().setVisible(true);
+//                new ManajemenSistemAntrian().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel antrianLabel;
+    private javax.swing.JLabel idPerawat;
+    private javax.swing.JLabel idUnitPelayanan;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel unitPelayananLabel;
     // End of variables declaration//GEN-END:variables
 }
