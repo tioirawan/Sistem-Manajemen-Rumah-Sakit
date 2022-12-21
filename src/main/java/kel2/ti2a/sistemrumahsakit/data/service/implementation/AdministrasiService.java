@@ -41,7 +41,15 @@ public class AdministrasiService implements IAdministrasiService{
 
     @Override
     public Antrian daftarkanPasienKeAntrian(int nomorPasien, int unitPelayananId) {
-        
+        Antrian antre = null;
+        try {
+            antre = new Antrian();
+//            antre.insertIntoAntrean(nomorPasien, unitPelayananId); 
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return antre;
     }
 
     @Override

@@ -5,6 +5,7 @@
 package kel2.ti2a.sistemrumahsakit.data.model;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
 
@@ -13,20 +14,11 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
  * @author tioirawan
  */
 public class Antrian {
-    protected int id;
     protected int nomorAntrean;
     protected int pasien_id;
     protected int unitpelayanan_id;
     protected String timestamp;
     protected String status;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getNomorAntrean() {
         return nomorAntrean;
@@ -74,7 +66,6 @@ public class Antrian {
         try{
             while (rs.next()) {
                 Antrian a = new Antrian();
-                a.setId(rs.getInt("id"));
                 a.setNomorAntrean(rs.getInt("nomorAntrean"));
                 a.setPasien_id(rs.getInt("pasien_id"));
                 a.setStatus(rs.getString("status"));
@@ -90,9 +81,28 @@ public class Antrian {
         return listAntrian;
     }
     
-    public boolean insertIntoAntrean(){
-        
+    public static Antrian getById(int noAntrean){
+        Antrian antre = null;
+        String sql = "SELECT * FROM antrean WHERE noAntrean = '" + noAntrean + "'";
+        ResultSet rs = DBHelper.selectQuery(sql);
+        try {
+            if (rs.next()) {
+                antre = new Antrian();
+                antre.setPasien_id(rs.getInt("pasien_id"));
+                antre.setStatus(rs.getString("status"));
+                antre.setTimestamp(rs.getString("timestamp"));
+                antre.setUnitpelayanan_id(rs.getInt("unitpelayanan_id"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return antre;
+    }
+    
+    public boolean insertIntoAntrean(int pasien_id, int unitpelayanan_id){
+        if (Antrian.getById(nomorAntrean) == null) {
+            
+        }
+        return true;
     }
 }
-
-

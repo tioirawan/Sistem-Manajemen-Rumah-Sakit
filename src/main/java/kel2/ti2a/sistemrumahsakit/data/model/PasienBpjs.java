@@ -51,8 +51,7 @@ public class PasienBpjs extends Pasien{
     @Override
     public void save() {
         if (Pasien.getById(id) == null) {
-            String SQL = "INSERT INTO pasien (noPasien, jenisKelamin, nama, tanggalLahir, type) VALUES ("
-                    + " '" + this.noPasien + "', "
+            String SQL = "INSERT INTO pasien (jenisKelamin, nama, tanggalLahir, type) VALUES ("
                     + " '" + this.jenisKelamin + "', "
                     + " '" + this.nama + "', "
                     + " '" + this.tanggalLahir + "', "
@@ -62,7 +61,7 @@ public class PasienBpjs extends Pasien{
             id = DBHelper.insertQueryGetId(SQL);
 
             String SQL2 = "INSERT INTO pasienbpjs (pasien_id, noBpjs) VALUES ("
-                    + " '" + this.id + "' "
+                    + " '" + this.id + "' ,"
                     + " '" + this.noBpjs + "' "
                     + " )";
 

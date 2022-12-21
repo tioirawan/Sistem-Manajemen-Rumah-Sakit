@@ -266,6 +266,7 @@ public class ApotekerMenu extends javax.swing.JFrame {
     private void tableObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableObatMouseClicked
         JTable source = (JTable)evt.getSource();   
         int row = source.rowAtPoint(evt.getPoint());
+
         String idGet = source.getModel().getValueAt(row, 0)+"";
         id.setText(idGet);
        
