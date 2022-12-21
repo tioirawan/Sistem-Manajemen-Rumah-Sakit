@@ -5,6 +5,7 @@
 package kel2.ti2a.sistemrumahsakit.data.service.implementation;
 
 import java.util.ArrayList;
+import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.data.model.Pasien;
 import kel2.ti2a.sistemrumahsakit.data.model.PasienAsuransi;
@@ -44,7 +45,8 @@ public class AdministrasiService implements IAdministrasiService{
         Antrian antre = null;
         try {
             antre = new Antrian();
-            antre.insertIntoAntrean(nomorPasien, unitPelayananId);
+            int id = antre.insertIntoAntrean(nomorPasien, unitPelayananId);
+            antre = Antrian.getById(id);
         } catch (Exception e) {
             e.printStackTrace();
         }

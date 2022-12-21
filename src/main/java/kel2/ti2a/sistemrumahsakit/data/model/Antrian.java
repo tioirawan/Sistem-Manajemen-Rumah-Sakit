@@ -158,10 +158,20 @@ public class Antrian {
     }
     
     
-    public boolean insertIntoAntrean(int pasien_id, int unitpelayanan_id){
-        if (Antrian.getById(nomorAntrean) == null) {
-            
+    public int insertIntoAntrean(int pasien_id, int unitpelayanan_id){
+        try {
+            String sql = "INSERT INTO antrean (pasien_id, unitpelayanan_id, timestamp, status) VALUES ('"
+                    + pasien_id + "', '"
+                    + unitpelayanan_id + "', "
+                    + "DATE(timestamp)," 
+                    + "'ANTRI')";
+            this.nomorAntrean = DBHelper.insertQueryGetId(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return true;
+        if (Antrian.getById(this.nomorAntrean) != null) {
+            return this.nomorAntrean;
+        }
+        return -1;
     }
 }
