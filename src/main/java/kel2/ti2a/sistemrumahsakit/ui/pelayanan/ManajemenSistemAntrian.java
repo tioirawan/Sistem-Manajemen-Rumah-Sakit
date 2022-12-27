@@ -62,6 +62,7 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel2.setText("Antrian saat ini             : ");
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jButton1.setText("Selanjutnya");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {

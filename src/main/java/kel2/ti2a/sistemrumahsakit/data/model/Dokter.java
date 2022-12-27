@@ -13,16 +13,11 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
  * @author tioirawan
  */
 public class Dokter extends Karyawan {
-    private int unitPelayananId;
     private int dokter_id;
     private int karyawan_id;
     private String status; // koas, dokter, spesialis
     private int tarif;
 
-    public int getUnitPelayananId() {
-        return unitPelayananId;
-    }
-    
     public int getDokterId() {
         return dokter_id;
     }

@@ -77,6 +77,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setText("Simpan");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,7 +164,7 @@ public class PendaftaranPasienBaru extends javax.swing.JFrame {
                             .addComponent(jLabel6))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
                                 .addComponent(jLabel3)
                                 .addGap(359, 359, 359))
                             .addGroup(layout.createSequentialGroup()

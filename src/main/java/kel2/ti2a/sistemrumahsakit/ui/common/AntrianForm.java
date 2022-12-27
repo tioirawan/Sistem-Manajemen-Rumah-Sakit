@@ -57,6 +57,7 @@ public class AntrianForm extends javax.swing.JFrame {
         noAntrianLabel.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         noAntrianLabel.setText("jLabel2");
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

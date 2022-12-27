@@ -41,7 +41,6 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(600, 300));
 
         jLabel1.setText("ID Pasien");
 
@@ -55,6 +54,7 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
 
         unitPelayananComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Poli Gigi", "THT", "Umum", "Poli Anak", "Poli Paru" }));
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("DAFTAR");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {

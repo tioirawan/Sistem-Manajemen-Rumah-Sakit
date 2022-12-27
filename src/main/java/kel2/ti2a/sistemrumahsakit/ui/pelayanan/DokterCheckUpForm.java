@@ -38,7 +38,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     
     public void tampilData(int dokter){
         Antrian a = Antrian.getAntrianCheckupByUnitPelayanan(Dokter.getUnitPelayananIdByDokterId(dokter));
-        
+        System.out.println();
         Pasien p = Pasien.getById(a.getPasien_id());
         String[] kolom = {"Tanggal", "Penyakit", "Resep"};
         ArrayList<Diagnosa> listDiagnosa = new Diagnosa().getDiagnosaByPasienID(a.getPasien_id());

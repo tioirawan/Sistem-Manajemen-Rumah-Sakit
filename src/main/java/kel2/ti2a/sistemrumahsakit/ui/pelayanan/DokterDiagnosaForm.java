@@ -200,6 +200,7 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(resepTextPane);
 
+        jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("SELESAI");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {

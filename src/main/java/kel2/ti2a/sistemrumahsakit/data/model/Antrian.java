@@ -104,7 +104,6 @@ public class Antrian {
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP'");
         try{
             while (rs.next()) {
-                an.setNomorAntrean(rs.getInt("nomorAntrean"));
                 an.setPasien_id(rs.getInt("pasien_id"));
                 an.setStatus(rs.getString("status"));
                 an.setTimestamp(rs.getString("timestamp"));
