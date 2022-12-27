@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.data.model.Perawat;
 import kel2.ti2a.sistemrumahsakit.data.model.UnitPelayanan;
+import kel2.ti2a.sistemrumahsakit.ui.auth.LoginKaryawan;
 
 /**
  *
@@ -30,11 +31,12 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     
     public void setUnitPelayananLabel(int unitPelayananId){
         UnitPelayanan up = UnitPelayanan.getById(unitPelayananId);
-        unitPelayananLabel.setText(up.getNama());
+        unitPelayananNameText.setText(up.getNama());
     }
     
     public void setAntrianLabel(int unitPelayananId){
         Antrian an = Antrian.getAntrianCheckupByUnitPelayanan(unitPelayananId);
+        System.out.println(an.getPasien_id());
         antrianLabel.setText(String.valueOf(an.getNomorAntrean()));
     }
 
@@ -53,11 +55,13 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
         antrianLabel = new javax.swing.JLabel();
         idPerawat = new javax.swing.JLabel();
         idUnitPelayanan = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        unitPelayananNameText = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         unitPelayananLabel.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
-        unitPelayananLabel.setText("Sistem Antrian              : Poli Gigi");
+        unitPelayananLabel.setText("Sistem Antrian              :");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
         jLabel2.setText("Antrian saat ini             : ");
@@ -83,6 +87,18 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
 
         idUnitPelayanan.setText("jLabel1");
 
+        jButton2.setBackground(new java.awt.Color(255, 102, 102));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Logout");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+
+        unitPelayananNameText.setFont(new java.awt.Font("Times New Roman", 0, 24)); // NOI18N
+        unitPelayananNameText.setText("Poli");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,9 +107,16 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(unitPelayananLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(unitPelayananLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(unitPelayananNameText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(32, 32, 32))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -112,9 +135,16 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(unitPelayananLabel)
-                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(unitPelayananLabel)
+                            .addComponent(unitPelayananNameText))))
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idPerawat)
                     .addComponent(idUnitPelayanan))
@@ -122,12 +152,13 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(16, 16, 16)
                 .addComponent(antrianLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(32, 32, 32))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -137,6 +168,12 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
        Antrian.nextAntrian(Integer.parseInt(idUnitPelayanan.getText()));
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        LoginKaryawan lk = new LoginKaryawan();
+        lk.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,7 +218,9 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     private javax.swing.JLabel idPerawat;
     private javax.swing.JLabel idUnitPelayanan;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel unitPelayananLabel;
+    private javax.swing.JLabel unitPelayananNameText;
     // End of variables declaration//GEN-END:variables
 }
