@@ -5,6 +5,7 @@
 package kel2.ti2a.sistemrumahsakit.ui.pelayanan;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import kel2.ti2a.sistemrumahsakit.data.model.Antrian;
 import kel2.ti2a.sistemrumahsakit.data.model.Perawat;
 import kel2.ti2a.sistemrumahsakit.data.model.UnitPelayanan;
@@ -166,7 +167,12 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       Antrian.nextAntrian(Integer.parseInt(idUnitPelayanan.getText()));
+       int currentAntrean = Antrian.getAntrianCheckupByUnitPelayanan(Integer.parseInt(idUnitPelayanan.getText())).getId();
+       if(currentAntrean != 0){
+           JOptionPane.showMessageDialog(this, "Masih terdapat pasien pada ruangan dokter");
+       }else{
+           Antrian.nextAntrian(Integer.parseInt(idUnitPelayanan.getText()));
+       }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

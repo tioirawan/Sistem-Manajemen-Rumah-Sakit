@@ -138,7 +138,7 @@ public class Antrian {
     
     public static int getLatestNoAntreanByUnitPelayanan(int id){
         int noAntrean = 0;
-        ResultSet rs = DBHelper.selectQuery("SELECT MIN(nomorAntrean) AS no FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'ANTRI'");
+        ResultSet rs = DBHelper.selectQuery("SELECT MIN(id) AS no FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'ANTRI'");
         try{
             while (rs.next()) {
                 noAntrean = rs.getInt("no");
@@ -167,10 +167,7 @@ public class Antrian {
     public static Boolean nextAntrian(int unitPelayanan){
         Boolean statusNext = false;
         
-        String sqlUpdate = "UPDATE antrean SET status = 'OBAT' WHERE unitpelayanan_id = " + unitPelayanan + " AND pasien_id = '" + String.valueOf(getLatestCheckupByUnitPelayanan(unitPelayanan)) + "'";
-        DBHelper.executeQuery(sqlUpdate);
-        
-        String sqlUpdateCheckUp = "UPDATE antrean SET status = 'CHECKUP' WHERE unitpelayanan_id = " + unitPelayanan + " AND pasien_id = '" + String.valueOf(getLatestNoAntreanByUnitPelayanan(unitPelayanan)) + "'";
+        String sqlUpdateCheckUp = "UPDATE antrean SET status = 'CHECKUP' WHERE unitpelayanan_id = " + unitPelayanan + " AND id = '" + String.valueOf(getLatestNoAntreanByUnitPelayanan(unitPelayanan)) + "'";
         statusNext = DBHelper.executeQuery(sqlUpdateCheckUp);
         
         return statusNext;

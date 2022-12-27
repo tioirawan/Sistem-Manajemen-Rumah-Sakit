@@ -39,26 +39,33 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
     
     public void tampilData(int dokter){
         Antrian a = Antrian.getAntrianCheckupByUnitPelayanan(Dokter.getUnitPelayananIdByDokterId(dokter));
-        System.out.println();
-        Pasien p = Pasien.getById(a.getPasien_id());
         String[] kolom = {"Tanggal", "Penyakit", "Resep"};
-        ArrayList<Diagnosa> listDiagnosa = new Diagnosa().getDiagnosaByPasienID(a.getPasien_id());
         Object rowData[] = new Object[3];
-        
         tabelRiwayat.setModel(new DefaultTableModel(new Object[][] {}, kolom));
-        
-        for(Diagnosa d : listDiagnosa){
-            rowData[0] = d.getTglDatang();
-            rowData[1] = d.getPenyakit();
-            rowData[2] = d.getResep();
+        if(a.getId() != 0){
+            Pasien p = Pasien.getById(a.getPasien_id());
             
-            ((DefaultTableModel)tabelRiwayat.getModel()).addRow(rowData);
+            ArrayList<Diagnosa> listDiagnosa = new Diagnosa().getDiagnosaByPasienID(a.getPasien_id());
+            
+            for(Diagnosa d : listDiagnosa){
+                rowData[0] = d.getTglDatang();
+                rowData[1] = d.getPenyakit();
+                rowData[2] = d.getResep();
+
+                ((DefaultTableModel)tabelRiwayat.getModel()).addRow(rowData);
+            }
+            textNama.setText(p.getNama());
+            textJK.setText(p.getJenisKelamin());
+            textNoPasien.setText(p.getNoPasien());
+            textTtl.setText(p.getTanggaLahir());
+            pasienId.setText(String.valueOf(p.getId()));
+        }else{
+            textNama.setText("Tunggu Antrian");
+            textJK.setText("Tunggu Antrian");
+            textNoPasien.setText("Tunggu Antrian");
+            textTtl.setText("Tunggu Antrian");
+            pasienId.setText("Tunggu Antrian");
         }
-        textNama.setText(p.getNama());
-        textJK.setText(p.getJenisKelamin());
-        textNoPasien.setText(p.getNoPasien());
-        textTtl.setText(p.getTanggaLahir());
-        pasienId.setText(String.valueOf(p.getId()));
     }
 
     /**
