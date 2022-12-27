@@ -14,6 +14,7 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
 public class UnitPelayanan {
     private String nama;
     private int biayaPelayanan;
+    private int dokter_id;
 
     public int getBiayaPelayanan() {
         return biayaPelayanan;
@@ -22,7 +23,7 @@ public class UnitPelayanan {
     public void setBiayaPelayanan(int biayaPelayanan) {
         this.biayaPelayanan = biayaPelayanan;
     }
-    private int dokter_id;
+    
 
     public UnitPelayanan(String nama, int dokter_id, int biayaPelayanan) {
         this.nama = nama;

@@ -136,7 +136,9 @@ public class Diagnosa {
                 + "'" + this.pasien_id + "'"
                 + ")";
                 
+        String SQL2 = "UPDATE antrean SET status = 'OBAT' WHERE pasien_id = '" + this.getPasien_id() +  "' AND status = 'CHECKUP'";
         this.id = DBHelper.insertQueryGetId(SQL);
+        DBHelper.executeQuery(SQL2);
     }
 
     protected void update() {

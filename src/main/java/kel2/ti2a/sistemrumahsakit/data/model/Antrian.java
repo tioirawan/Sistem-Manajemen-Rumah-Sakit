@@ -14,18 +14,18 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
  * @author tioirawan
  */
 public class Antrian {
-    protected int nomorAntrean;
+    protected int id;
     protected int pasien_id;
     protected int unitpelayanan_id;
     protected String timestamp;
     protected String status;
 
-    public int getNomorAntrean() {
-        return nomorAntrean;
+    public int getId() {
+        return id;
     }
 
-    public void setNomorAntrean(int nomorAntrean) {
-        this.nomorAntrean = nomorAntrean;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getPasien_id() {
@@ -66,7 +66,7 @@ public class Antrian {
         try{
             while (rs.next()) {
                 Antrian a = new Antrian();
-                a.setNomorAntrean(rs.getInt("nomorAntrean"));
+                a.setId(rs.getInt("id"));
                 a.setPasien_id(rs.getInt("pasien_id"));
                 a.setStatus(rs.getString("status"));
                 a.setTimestamp(rs.getString("timestamp"));
@@ -83,11 +83,12 @@ public class Antrian {
     
     public static Antrian getById(int noAntrean){
         Antrian antre = null;
-        String sql = "SELECT * FROM antrean WHERE nomorAntrean = '" + noAntrean + "'";
+        String sql = "SELECT * FROM antrean WHERE id = '" + noAntrean + "'";
         ResultSet rs = DBHelper.selectQuery(sql);
         try {
             if (rs.next()) {
                 antre = new Antrian();
+                antre.setId(rs.getInt("id"));
                 antre.setPasien_id(rs.getInt("pasien_id"));
                 antre.setStatus(rs.getString("status"));
                 antre.setTimestamp(rs.getString("timestamp"));
@@ -104,7 +105,25 @@ public class Antrian {
         ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP'");
         try{
             while (rs.next()) {
-                an.setNomorAntrean(rs.getInt("id"));
+                an.setId(rs.getInt("id"));
+                an.setPasien_id(rs.getInt("pasien_id"));
+                an.setStatus(rs.getString("status"));
+                an.setTimestamp(rs.getString("timestamp"));
+                an.setUnitpelayanan_id(rs.getInt("unitPelayanan_id"));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return an;
+    }
+    
+    public static Antrian getAntrianNextByUnitPelayanan(int id){
+        Antrian an = new Antrian();
+        ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP' OR status = 'OBAT'");
+        try{
+            while (rs.next()) {
+                an.setId(rs.getInt("id"));
                 an.setPasien_id(rs.getInt("pasien_id"));
                 an.setStatus(rs.getString("status"));
                 an.setTimestamp(rs.getString("timestamp"));
@@ -165,12 +184,12 @@ public class Antrian {
                     + unitpelayanan_id + "', "
                     + "DATE(timestamp)," 
                     + "'ANTRI')";
-            this.nomorAntrean = DBHelper.insertQueryGetId(sql);
+            this.id = DBHelper.insertQueryGetId(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (Antrian.getById(this.nomorAntrean) != null) {
-            return this.nomorAntrean;
+        if (Antrian.getById(this.id) != null) {
+            return this.id;
         }
         return -1;
     }

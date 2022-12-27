@@ -20,8 +20,8 @@ public class AntrianForm extends javax.swing.JFrame {
         initComponents();
 //        noAntrianLabel.setVisible(false);
 //        noAntrianSaatIni.setVisible(false);
-        noAntrianLabel.setText(String.valueOf(an.getNomorAntrean()));
-        noAntrianSaatIni.setText(String.valueOf(an.getAntrianByUnitPelayanan(an.getUnitpelayanan_id())));
+        noAntrianLabel.setText(String.valueOf(an.getId()));
+        noAntrianSaatIni.setText(String.valueOf(Antrian.getAntrianCheckupByUnitPelayanan(an.getUnitpelayanan_id()).getId()));
     }
 
     /**

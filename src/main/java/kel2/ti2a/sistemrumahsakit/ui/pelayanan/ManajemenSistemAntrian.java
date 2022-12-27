@@ -35,9 +35,9 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     }
     
     public void setAntrianLabel(int unitPelayananId){
-        Antrian an = Antrian.getAntrianCheckupByUnitPelayanan(unitPelayananId);
+        Antrian an = Antrian.getAntrianNextByUnitPelayanan(unitPelayananId);
         System.out.println(an.getPasien_id());
-        antrianLabel.setText(String.valueOf(an.getNomorAntrean()));
+        antrianLabel.setText(String.valueOf(an.getId()));
     }
 
     /**
