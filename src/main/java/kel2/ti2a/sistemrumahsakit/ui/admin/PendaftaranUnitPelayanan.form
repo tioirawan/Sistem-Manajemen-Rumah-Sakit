@@ -80,14 +80,15 @@
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
             <StringItem index="0" value="Poli Gigi"/>
-            <StringItem index="1" value="THT"/>
-            <StringItem index="2" value="Umum"/>
+            <StringItem index="1" value="Umum"/>
+            <StringItem index="2" value="THT"/>
             <StringItem index="3" value="Poli Anak"/>
             <StringItem index="4" value="Poli Paru"/>
           </StringArray>
         </Property>
       </Properties>
       <AuxValues>
+        <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="PendaftaranUnitPelayanan_unitPelayananComboBox"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>

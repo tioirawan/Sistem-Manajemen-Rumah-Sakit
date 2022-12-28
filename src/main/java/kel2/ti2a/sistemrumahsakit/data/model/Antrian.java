@@ -120,7 +120,7 @@ public class Antrian {
     
     public static Antrian getAntrianNextByUnitPelayanan(int id){
         Antrian an = new Antrian();
-        ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND status = 'CHECKUP' OR status = 'OBAT'");
+        ResultSet rs = DBHelper.selectQuery("SELECT * FROM antrean WHERE unitpelayanan_id = '" +id+"' AND (status = 'CHECKUP' OR status = 'OBAT')");
         try{
             while (rs.next()) {
                 an.setId(rs.getInt("id"));

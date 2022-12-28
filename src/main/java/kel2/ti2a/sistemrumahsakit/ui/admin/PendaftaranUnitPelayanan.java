@@ -52,7 +52,7 @@ public class PendaftaranUnitPelayanan extends javax.swing.JFrame {
 
         jLabel2.setText("Unit Pelayanan");
 
-        unitPelayananComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Poli Gigi", "THT", "Umum", "Poli Anak", "Poli Paru" }));
+        unitPelayananComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Poli Gigi", "Umum", "THT", "Poli Anak", "Poli Paru" }));
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

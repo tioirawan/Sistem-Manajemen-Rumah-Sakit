@@ -134,10 +134,10 @@ public class Diagnosa {
                 + "'" + this.resep + "', "
                 + "'" + this.penyakit + "', "
                 + "'" + this.pasien_id + "'"
-                + ")";
+                + ")"; 
+        this.id = DBHelper.insertQueryGetId(SQL);
                 
         String SQL2 = "UPDATE antrean SET status = 'OBAT' WHERE pasien_id = '" + this.getPasien_id() +  "' AND status = 'CHECKUP'";
-        this.id = DBHelper.insertQueryGetId(SQL);
         DBHelper.executeQuery(SQL2);
     }
 

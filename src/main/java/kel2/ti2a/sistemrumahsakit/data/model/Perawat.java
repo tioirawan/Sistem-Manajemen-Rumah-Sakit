@@ -96,7 +96,7 @@ public class Perawat extends Karyawan {
 //
 //        p.save();
 
-        Perawat p = (Perawat) Karyawan.getByNipAndPassword("2141722220", "perawat123");
+        Perawat p = (Perawat) Karyawan.getByNipAndPassword("2141720031", "perawat123");
 
         System.out.println(p.nama);
         System.out.println(p.unit_pelayanan_id);

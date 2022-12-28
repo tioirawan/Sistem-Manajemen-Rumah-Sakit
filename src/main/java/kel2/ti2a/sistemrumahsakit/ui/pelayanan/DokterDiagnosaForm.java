@@ -33,7 +33,7 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
     
     public void setDataPasien(int pasienId){
         Pasien p = Pasien.getById(pasienId);
-        noPasienText.setText(p.getNoPasien());
+        noPasienText.setText(String.valueOf(p.getId()));
         namaPasienText.setText(p.getNama());
         jenisKelaminText.setText(p.getJenisKelamin());
         tanggalLahirText.setText(p.getTanggaLahir());
@@ -81,7 +81,7 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
         jLabel1.setText("DATA PASIEN");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel2.setText("No Pasien");
+        jLabel2.setText("Id Pasien");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Nama Pasien");
@@ -294,11 +294,9 @@ public class DokterDiagnosaForm extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Diagnosa d = new Diagnosa();
         d.setDokter_id(Integer.parseInt(dokterIdText.getText()));
-        d.setPasien_id(Integer.parseInt(pasienText.getText()));
-        System.out.println(noPasienText.getText());
+        d.setPasien_id(Integer.parseInt(noPasienText.getText()));
         d.setPenyakit(diagnosaText.getText());
         d.setResep(resepTextPane.getText());
-//        d.setTglDatang(String.valueOf(now));
 
         d.save();
         new DokterCheckUpForm((Dokter) Dokter.getById(Integer.parseInt(karyawanIdText.getText()))).setVisible(true);

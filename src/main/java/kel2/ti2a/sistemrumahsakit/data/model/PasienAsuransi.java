@@ -58,8 +58,7 @@ public class PasienAsuransi extends Pasien{
     @Override
     public void save() {
         if (Pasien.getById(id) == null) {
-            String SQL = "INSERT INTO pasien (noPasien, jenisKelamin, nama, tanggalLahir, type) VALUES ("
-                    + " '" + this.noPasien + "', "
+            String SQL = "INSERT INTO pasien (jenisKelamin, nama, tanggalLahir, type) VALUES ("
                     + " '" + this.jenisKelamin + "', "
                     + " '" + this.nama + "', "
                     + " '" + this.tanggalLahir + "', "
@@ -69,7 +68,7 @@ public class PasienAsuransi extends Pasien{
             id = DBHelper.insertQueryGetId(SQL);
 
             String SQL2 = "INSERT INTO pasienasuransi (pasien_id, noAsuransi, namaAsuransi) VALUES ("
-                    + " '" + this.id + "' "
+                    + " '" + this.id + "', "
                     + " '" + this.noAsuransi + "', "
                     + " '" + this.namaAsuransi + "' "
                     + " )";
@@ -77,7 +76,6 @@ public class PasienAsuransi extends Pasien{
             DBHelper.executeQuery(SQL2);
         } else {
             String SQL = "UPDATE pasien SET "
-                    + " noPasien = '" + this.noPasien + "', "
                     + " jenisKelamin = '" + this.jenisKelamin + "', "
                     + " nama = '" + this.nama + "', " 
                     + " tanggalLahir = '" + this.tanggalLahir + "' "

@@ -56,7 +56,7 @@ public class DokterCheckUpForm extends javax.swing.JFrame {
             }
             textNama.setText(p.getNama());
             textJK.setText(p.getJenisKelamin());
-            textNoPasien.setText(p.getNoPasien());
+            textNoPasien.setText(String.valueOf(p.getId()));
             textTtl.setText(p.getTanggaLahir());
             pasienId.setText(String.valueOf(p.getId()));
         }else{

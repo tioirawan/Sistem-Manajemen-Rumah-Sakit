@@ -68,7 +68,6 @@ public class PasienBpjs extends Pasien{
             DBHelper.executeQuery(SQL2);
         } else {
             String SQL = "UPDATE pasien SET "
-                    + " noPasien = '" + this.noPasien + "', "
                     + " jenisKelamin = '" + this.jenisKelamin + "', "
                     + " nama = '" + this.nama + "', " 
                     + " tanggalLahir = '" + this.tanggalLahir + "' "

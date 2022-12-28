@@ -14,7 +14,6 @@ import kel2.ti2a.sistemrumahsakit.data.helper.DBHelper;
  */
 public abstract class Pasien {
     protected int id;
-    protected String noPasien;
     protected String jenisKelamin;
     protected String nama;
     protected String tanggalLahir;
@@ -26,14 +25,6 @@ public abstract class Pasien {
 
     protected void setId(int id) {
         this.id = id;
-    }
-
-    public String getNoPasien() {
-        return noPasien;
-    }
-
-    public void setNoPasien(String nama) {
-        this.noPasien = nama;
     }
 
     public String getJenisKelamin() {
@@ -95,7 +86,6 @@ public abstract class Pasien {
         pasien.setNama(rs.getString("Nama"));
         pasien.setTanggalLahir(rs.getString("tanggalLahir"));
         pasien.setType(rs.getString("type"));
-        pasien.setNoPasien(rs.getString("noPasien"));
 
         // load data detail dari tabel entah (Dokter, Perawat, dll)
         pasien.loadData();

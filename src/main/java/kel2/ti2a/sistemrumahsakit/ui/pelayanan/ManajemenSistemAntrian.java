@@ -37,7 +37,6 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
     
     public void setAntrianLabel(int unitPelayananId){
         Antrian an = Antrian.getAntrianNextByUnitPelayanan(unitPelayananId);
-        System.out.println(an.getPasien_id());
         antrianLabel.setText(String.valueOf(an.getId()));
     }
 
@@ -171,7 +170,9 @@ public class ManajemenSistemAntrian extends javax.swing.JFrame {
        if(currentAntrean != 0){
            JOptionPane.showMessageDialog(this, "Masih terdapat pasien pada ruangan dokter");
        }else{
-           Antrian.nextAntrian(Integer.parseInt(idUnitPelayanan.getText()));
+           int idUP = Integer.parseInt(idUnitPelayanan.getText());
+           Antrian.nextAntrian(idUP);
+           setAntrianLabel(idUP);
        }
     }//GEN-LAST:event_jButton1MouseClicked
 
